@@ -12,65 +12,26 @@ type Props = {
 }
 
 /**
- * ZIMBABWE "TEAPOT" OUTLINE
- * Accurate tracing of the borders to ensure the iconic shape is recognizable.
+ * Focused Zimbabwe outline
+ * Hand-traced silhouette emphasizing:
+ * - Zambezi / Victoria Falls indentation (NW)
+ * - Lake Kariba curvature (north-central)
+ * - NE Kanyemba corner
+ * - Eastern Highlands "spout" around Mutare
+ * - Smooth southern tip at Beitbridge
  */
 const ZIM_OUTLINE =
-  "M 50 130 " +       // Victoria Falls (Top of handle)
-  "L 110 100 " +      // Upper Zambezi
-  "Q 180 50, 260 80 " + // Lake Kariba curve
-  "L 330 30 " +       // Kanyemba (NE tip)
-  "L 360 110 " +      // Eastern border starts
-  "L 430 190 " +      // Mutare (The "Spout" tip)
-  "L 380 250 " +      // Chipinge curve
-  "L 280 320 " +      // Beitbridge (Bottom)
-  "L 160 290 " +      // Shashe River area
-  "L 60 230 " +       // Plumtree (Bottom of handle)
-  "L 40 180 " +       // Western border
-  "Z"
-
-const REGION_SHAPES = [
-  // Region IV: The Base layer (Semi-arid)
-  { id: 4, d: "M 0 0 H 500 V 400 H 0 Z" },
-
-  // Region III: The Midveld Crescent
-  {
-    id: 3,
-    d: "M 120 160 Q 220 110, 350 150 Q 380 200, 300 280 Q 180 260, 120 160 Z"
-  },
-
-  // Region II: The Highveld Core (Harare region)
-  {
-    id: 2,
-    d: "M 210 120 Q 280 80, 360 110 L 370 190 Q 280 220, 210 120 Z"
-  },
-
-  // Region V: North (Zambezi Valley)
-  {
-    id: 5,
-    d: "M 50 130 L 330 30 L 360 100 L 110 140 Z"
-  },
-
-  // Region V: South (Lowveld)
-  {
-    id: 5,
-    d: "M 220 300 L 280 320 L 400 240 L 300 250 Z"
-  },
-
-  // Region I: Eastern Highlands (Thin strip)
-  {
-    id: 1,
-    d: "M 365 110 L 430 190 L 385 245 L 355 240 L 345 120 Z"
-  }
-]
-
-const CITIES = [
-  { name: "Harare", x: 295, y: 125, anchor: "start" as const },
-  { name: "Bulawayo", x: 155, y: 220, anchor: "end" as const },
-  { name: "Mutare", x: 400, y: 180, anchor: "start" as const },
-  { name: "Vic Falls", x: 65, y: 135, anchor: "start" as const },
-  { name: "Beitbridge", x: 280, y: 310, anchor: "middle" as const },
-]
+  "M 54 126 " +                                      // Vic Falls area (NW)
+  "C 78 106, 110 92, 160 86 " +                      // Zambezi approach
+  "C 200 82, 240 86, 280 100 " +                     // Lake Kariba arc
+  "C 300 108, 320 96, 345 100 " +                    // NE corner (Kanyemba)
+  "C 360 106, 380 120, 392 150 " +                   // curve toward Mutare
+  "C 400 170, 410 190, 405 210 " +                   // rising into Eastern Highlands
+  "C 395 230, 380 245, 365 255 " +                   // eastern foothills
+  "C 340 280, 310 300, 275 318 " +                   // southern approach
+  "C 240 335, 200 338, 170 320 " +                   // Shashe / Plumtree curve
+  "C 130 300, 100 260, 80 210 " +                    // western inward curve
+  "C 68 170, 58 150, 54 126 Z"                       // back to Vic Falls
 
 export function ZimbabweMap({
   activeRegion = null,
@@ -79,83 +40,89 @@ export function ZimbabweMap({
   interactive = true,
   showLabels = true,
 }: Props) {
+  return null;
+
+  // The map is currently disabled per request.
+  // To restore, remove 'return null;' and the unreachable return below.
   return (
-    <div className={cn("relative w-full aspect-[450/350]", className)}>
+    <div className={cn("relative w-full aspect-[520/380]", className)}>
       <svg
-        viewBox="0 0 450 350"
+        viewBox="0 0 520 380"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full select-none"
+        preserveAspectRatio="xMidYMid meet"
       >
         <defs>
           <clipPath id="zim-clip">
             <path d={ZIM_OUTLINE} />
           </clipPath>
+
+          <linearGradient id="zim-grad" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.02)" />
+            <stop offset="100%" stopColor="rgba(0,0,0,0.04)" />
+          </linearGradient>
+
+          <filter id="zim-shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="6" floodColor="#000" floodOpacity="0.12" />
+          </filter>
         </defs>
 
-        {/* Background Silhouette */}
-        <path d={ZIM_OUTLINE} fill="var(--muted)" />
+        <path
+          d={ZIM_OUTLINE}
+          fill="var(--muted)"
+          filter="url(#zim-shadow)"
+        />
 
-        {/* Painted Regions */}
         <g clipPath="url(#zim-clip)">
-          {REGION_SHAPES.map((shape, idx) => {
-            const region = regions.find((r) => r.id === shape.id)
-            if (!region) return null
-            const isActive = activeRegion === shape.id
-            const isDimmed = activeRegion !== null && !isActive
-
-            return (
-              <path
-                key={`shape-${idx}`}
-                d={shape.d}
-                fill={region.colorVar}
-                className="transition-opacity duration-300"
-                style={{ opacity: isDimmed ? 0.2 : 1 }}
-              />
-            )
-          })}
+          <rect x="0" y="0" width="520" height="380" fill="url(#zim-grad)" />
         </g>
 
-        {/* Border */}
         <path
           d={ZIM_OUTLINE}
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
-          className="text-foreground/30"
+          className="text-foreground/60"
+          strokeLinejoin="round"
+          strokeLinecap="round"
         />
 
-        {/* Interactive Layer (Transparent hits) */}
         {interactive && (
-          <g clipPath="url(#zim-clip)">
-            {REGION_SHAPES.map((shape, idx) => (
-              <path
-                key={`hit-${idx}`}
-                d={shape.d}
-                fill="transparent"
-                className="cursor-pointer hover:fill-white/10 transition-colors"
-                onClick={() => onSelect?.(shape.id)}
-              />
-            ))}
-          </g>
+          <path
+            d={ZIM_OUTLINE}
+            fill="transparent"
+            className="cursor-pointer"
+            onClick={() => onSelect?.(0)}
+            aria-label="Zimbabwe silhouette"
+          />
         )}
 
-        {/* City Markers */}
         {showLabels && (
           <g className="pointer-events-none">
-            {CITIES.map((city) => (
-              <g key={city.name}>
-                <circle cx={city.x} cy={city.y} r="2.5" fill="currentColor" stroke="white" strokeWidth="1" />
-                <text
-                  x={city.x + (city.anchor === "start" ? 6 : -6)}
-                  y={city.y + 3}
-                  fontSize="9"
-                  textAnchor={city.anchor}
-                  className="fill-foreground font-semibold"
-                >
-                  {city.name}
-                </text>
-              </g>
-            ))}
+            <g>
+              <circle cx={270} cy={135} r={3} fill="currentColor" stroke="white" strokeWidth={1} />
+              <text x={278} y={139} fontSize={10} textAnchor="start" className="fill-foreground font-semibold">Harare</text>
+            </g>
+
+            <g>
+              <circle cx={150} cy={255} r={3} fill="currentColor" stroke="white" strokeWidth={1} />
+              <text x={142} y={259} fontSize={10} textAnchor="end" className="fill-foreground font-semibold">Bulawayo</text>
+            </g>
+
+            <g>
+              <circle cx={392} cy={175} r={3} fill="currentColor" stroke="white" strokeWidth={1} />
+              <text x={400} y={179} fontSize={10} textAnchor="start" className="fill-foreground font-semibold">Mutare</text>
+            </g>
+
+            <g>
+              <circle cx={58} cy={125} r={3} fill="currentColor" stroke="white" strokeWidth={1} />
+              <text x={66} y={129} fontSize={10} textAnchor="start" className="fill-foreground font-semibold">Vic Falls</text>
+            </g>
+
+            <g>
+              <circle cx={275} cy={320} r={3} fill="currentColor" stroke="white" strokeWidth={1} />
+              <text x={275} y={326} fontSize={10} textAnchor="middle" className="fill-foreground font-semibold">Beitbridge</text>
+            </g>
           </g>
         )}
       </svg>
