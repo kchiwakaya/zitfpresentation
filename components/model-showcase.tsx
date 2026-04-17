@@ -77,9 +77,9 @@ export function ModelShowcase({
 
   return (
     <div
-      className="rounded-2xl border border-border bg-card overflow-hidden flex flex-col"
+      className="rounded-2xl border border-border/40 glass overflow-hidden flex flex-col shadow-premium transition-all duration-500"
       style={{
-        backgroundImage: `linear-gradient(135deg, color-mix(in oklch, ${region.colorVar} 8%, transparent), transparent 60%)`,
+        backgroundImage: `linear-gradient(135deg, color-mix(in oklch, ${region.colorVar} 12%, transparent), transparent 70%)`,
       }}
     >
       {/* Header with toggle + auto-play */}
@@ -298,7 +298,7 @@ function FactRow({
   accentColor?: string
 }) {
   return (
-    <div className="rounded-lg border border-border/60 bg-background/60 p-3">
+    <div className="rounded-lg border border-border/40 bg-background/40 backdrop-blur-md p-3 transition-colors hover:bg-background/60">
       <div className="flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-semibold">
         {icon}
         {label}

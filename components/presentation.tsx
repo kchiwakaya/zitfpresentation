@@ -21,7 +21,7 @@ import { ComparisonSlide } from "@/components/slides/comparison-slide"
 import { QuestionSlide } from "@/components/slides/question-slide"
 import { ThanksSlide } from "@/components/slides/thanks-slide"
 
-const SLIDE_DURATION_MS = 18000 // auto-advance timing for booth kiosk mode
+const SLIDE_DURATION_MS = 28000 // auto-advance timing for booth kiosk mode
 
 // Rotating ticker messages for the bottom banner — automation that keeps
 // the kiosk display feeling alive between visitor interactions.
@@ -170,17 +170,22 @@ export function Presentation() {
   }
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-background bg-grain">
+    <div className="min-h-screen w-full flex flex-col bg-background bg-grain selection:bg-primary/20">
       {/* Top bar */}
-      <header className="shrink-0 border-b border-border/80 bg-background/80 backdrop-blur-sm relative">
+      <header className="shrink-0 border-b border-border/40 bg-background/60 backdrop-blur-xl relative z-50">
         <div className="mx-auto max-w-[1600px] px-4 md:px-6 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="h-9 w-9 rounded-lg bg-primary text-primary-foreground flex items-center justify-center shadow-sm">
-              <Sprout className="h-4 w-4" />
+            <div className="h-12 w-12 shrink-0 flex items-center justify-center">
+              <img 
+                src="/images/logo.jpg" 
+                alt="Ministry of Lands Logo"
+                className="max-h-full max-w-full object-contain"
+                loading="eager"
+              />
             </div>
             <div className="min-w-0">
               <div className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground font-semibold leading-none">
-                ZITF · Agricultural Presentation
+                Ministry of Lands and Rural Development
               </div>
               <div className="text-sm font-semibold truncate">
                 Zimbabwe&apos;s Five Natural Farming Regions
@@ -284,7 +289,7 @@ export function Presentation() {
       </div>
 
       {/* Bottom controls */}
-      <footer className="shrink-0 border-t border-border/80 bg-background/80 backdrop-blur-sm">
+      <footer className="shrink-0 border-t border-border/40 bg-background/60 backdrop-blur-xl z-50">
         <div className="mx-auto max-w-[1600px] px-4 md:px-6 h-14 flex items-center justify-between gap-4">
           <button
             onClick={() => go(index - 1)}

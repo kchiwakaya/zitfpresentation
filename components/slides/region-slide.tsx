@@ -19,7 +19,7 @@ export function RegionSlide({ region }: Props) {
       {/* ============ Column 1 — identity + landscape hero + map ============ */}
       <div className="flex flex-col gap-4 min-w-0">
         {/* Landscape hero banner */}
-        <div className="relative rounded-2xl overflow-hidden border border-border shadow-sm aspect-[4/3] lg:aspect-[5/4]">
+        <div className="relative rounded-2xl overflow-hidden border border-border/40 shadow-premium aspect-[4/3] lg:aspect-[5/4] transition-all duration-500">
           <img
             src={`/images/region-${region.id}.jpg`}
             alt={`Landscape of ${region.name}, Zimbabwe`}
@@ -66,7 +66,7 @@ export function RegionSlide({ region }: Props) {
         </p>
 
         {/* Animated rainfall band */}
-        <div className="rounded-xl border border-border bg-card p-4">
+        <div className="rounded-xl border border-border/40 glass p-4 shadow-premium">
           <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-semibold mb-2">
             <Droplets className="h-3.5 w-3.5" />
             Annual Rainfall
@@ -131,9 +131,9 @@ export function RegionSlide({ region }: Props) {
         </div>
 
         <div
-          className="rounded-2xl border border-border bg-card p-5 relative overflow-hidden flex-1"
+          className="rounded-2xl border border-border/40 glass p-5 relative overflow-hidden flex-1 shadow-premium"
           style={{
-            backgroundImage: `linear-gradient(135deg, color-mix(in oklch, ${region.colorVar} 14%, transparent), transparent 60%)`,
+            backgroundImage: `linear-gradient(135deg, color-mix(in oklch, ${region.colorVar} 18%, transparent), transparent 70%)`,
           }}
         >
           <div className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase text-muted-foreground font-semibold">
@@ -201,7 +201,7 @@ function StatCard({
   subColor?: string
 }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-3.5">
+    <div className="rounded-xl border border-border/40 bg-background/40 backdrop-blur-md p-3.5 shadow-sm transition-all hover:bg-background/60">
       <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-semibold">
         {icon}
         {label}

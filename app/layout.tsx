@@ -22,9 +22,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Zimbabwe's Five Natural Farming Regions | ZITF Presentation",
+  title: "Zimbabwe's Five Natural Farming Regions | Ministry of Lands",
   description:
-    "An interactive presentation exploring Zimbabwe's five agro-ecological regions, their rainfall, soils, and agricultural potential. Presented at the Zimbabwe International Trade Fair (ZITF).",
+    "An interactive presentation exploring Zimbabwe's five agro-ecological regions, presented by the Ministry of Lands and Rural Development.",
   generator: "v0.app",
 }
 

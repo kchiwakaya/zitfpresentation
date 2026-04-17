@@ -127,6 +127,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-premium: 0 4px 6px -1px oklch(0 0 0 / 0.05), 0 10px 15px -3px oklch(0 0 0 / 0.05), 0 20px 25px -5px oklch(0 0 0 / 0.03), inset 0 1px 0 0 oklch(1 0 0 / 0.1);
 }
 
 @layer base {
@@ -141,8 +143,8 @@
 /* Subtle grain texture helper */
 .bg-grain {
   background-image:
-    radial-gradient(circle at 1px 1px, oklch(0.22 0.05 145 / 0.06) 1px, transparent 0);
-  background-size: 20px 20px;
+    radial-gradient(circle at 1px 1px, oklch(0.22 0.05 145 / 0.04) 1px, transparent 0);
+  background-size: 32px 32px;
 }
 
 /* Topographic contour-line pattern for agricultural backgrounds */
@@ -150,17 +152,17 @@
   background-image:
     repeating-radial-gradient(
       circle at 20% 80%,
-      oklch(0.42 0.13 150 / 0.04) 0,
-      oklch(0.42 0.13 150 / 0.04) 1px,
-      transparent 1px,
-      transparent 36px
-    ),
-    repeating-radial-gradient(
-      circle at 80% 20%,
       oklch(0.42 0.13 150 / 0.03) 0,
       oklch(0.42 0.13 150 / 0.03) 1px,
       transparent 1px,
-      transparent 44px
+      transparent 48px
+    ),
+    repeating-radial-gradient(
+      circle at 80% 20%,
+      oklch(0.42 0.13 150 / 0.02) 0,
+      oklch(0.42 0.13 150 / 0.02) 1px,
+      transparent 1px,
+      transparent 64px
     );
 }
 
@@ -179,6 +181,46 @@
   50% { transform: rotate(1.5deg); }
 }
 .animate-sway {
-  animation: sway 4s ease-in-out infinite;
+  animation: sway 6s ease-in-out infinite;
   transform-origin: bottom center;
+}
+
+/* Premium utilities */
+.glass {
+  @apply bg-background/60 backdrop-blur-xl border border-white/20;
+  box-shadow: var(--shadow-premium);
+}
+
+.shadow-premium {
+  box-shadow: var(--shadow-premium);
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    to right,
+    var(--foreground) 20%,
+    var(--accent) 40%,
+    var(--accent) 60%,
+    var(--foreground) 80%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Custom premium cursor */
+@media (pointer: fine) {
+  body {
+    cursor: default;
+  }
+  a, button {
+    cursor: pointer;
+  }
 }

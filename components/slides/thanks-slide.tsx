@@ -95,7 +95,7 @@ export function ThanksSlide({ onRestart }: Props) {
             Restart Presentation
           </button>
           <div className="text-xs text-muted-foreground tracking-wider font-mono">
-            ZITF · Zimbabwe International Trade Fair
+            Ministry of Lands and Rural Development
           </div>
         </div>
       </div>

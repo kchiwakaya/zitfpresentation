@@ -122,15 +122,15 @@ export function OverviewSlide({ onJumpTo }: Props) {
               onMouseLeave={() => setHover(null)}
               onClick={() => onJumpTo(1 + r.id)}
               className={cn(
-                "group relative text-left rounded-xl border bg-card p-3.5 transition-all overflow-hidden",
+                "group relative text-left rounded-xl border p-3.5 transition-all overflow-hidden",
                 isActive
-                  ? "border-foreground/30 shadow-sm"
-                  : "border-border hover:border-foreground/30",
+                  ? "border-foreground/40 shadow-premium scale-[1.02] bg-background/80"
+                  : "border-border/60 hover:border-foreground/30 glass hover:scale-[1.01]",
               )}
               style={
                 isActive
                   ? {
-                      backgroundImage: `linear-gradient(90deg, color-mix(in oklch, ${r.colorVar} 10%, transparent), transparent 50%)`,
+                      backgroundImage: `linear-gradient(90deg, color-mix(in oklch, ${r.colorVar} 15%, transparent), transparent 70%)`,
                     }
                   : undefined
               }

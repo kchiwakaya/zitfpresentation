@@ -48,14 +48,19 @@ export function TitleSlide({ onStart, onStartAuto }: Props) {
       />
 
       <div className="relative max-w-4xl text-white">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-[11px] tracking-[0.22em] font-semibold text-white mb-8 uppercase">
-          <MapPin className="h-3.5 w-3.5" />
-          ZITF Presentation · Zimbabwe
+        <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-[11px] tracking-[0.22em] font-semibold text-white mb-8 uppercase">
+          <img 
+            src="/images/logo.jpg" 
+            alt=""
+            className="h-8 w-auto"
+            loading="eager"
+          />
+          Ministry of Lands and Rural Development
         </div>
 
         <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.95] tracking-tight text-balance drop-shadow-sm">
           Zimbabwe&apos;s{" "}
-          <span className="italic text-accent">Five Natural</span> Farming
+          <span className="italic text-shimmer">Five Natural</span> Farming
           Regions
         </h1>
 
@@ -69,16 +74,16 @@ export function TitleSlide({ onStart, onStartAuto }: Props) {
         <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
             onClick={onStart}
-            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-accent-foreground font-semibold hover:opacity-90 transition shadow-lg shadow-black/20"
+            className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-accent text-accent-foreground font-semibold hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 hover:shadow-accent/40"
           >
             <Sprout className="h-4 w-4" />
             Begin Presentation
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </button>
           {onStartAuto && (
             <button
               onClick={onStartAuto}
-              className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/40 text-white bg-white/10 backdrop-blur-sm font-semibold hover:bg-white/20 transition"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/40 text-white bg-white/10 backdrop-blur-md font-semibold hover:bg-white/25 hover:border-white/60 active:scale-95 transition-all"
             >
               <Play className="h-4 w-4" />
               Start Auto-Tour
@@ -100,7 +105,7 @@ export function TitleSlide({ onStart, onStartAuto }: Props) {
       </div>
 
       <div className="absolute bottom-8 left-0 right-0 flex items-center justify-center gap-6 text-[11px] text-white/85 tracking-[0.2em] uppercase">
-        <span>Zimbabwe International Trade Fair</span>
+        <span>Ministry of Lands and Rural Development</span>
         <span className="h-px w-6 bg-white/40" />
         <span>2026</span>
       </div>
