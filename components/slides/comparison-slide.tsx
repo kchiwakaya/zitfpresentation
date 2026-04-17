@@ -57,10 +57,10 @@ export function ComparisonSlide() {
                     {r.roman}
                   </div>
                   <div className="min-w-0">
-                    <div className="font-medium text-sm truncate">
+                    <div className="font-medium text-sm leading-snug">
                       {r.name}
                     </div>
-                    <div className="text-xs text-muted-foreground truncate">
+                    <div className="text-xs text-muted-foreground leading-relaxed mt-0.5">
                       {r.soil} · {r.soilQuality}
                     </div>
                   </div>

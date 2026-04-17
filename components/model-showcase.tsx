@@ -39,6 +39,7 @@ export function ModelShowcase({
   const [active, setActive] = useState<"A1" | "A2">("A1")
   const [playing, setPlaying] = useState(autoCycle)
   const [progress, setProgress] = useState(0)
+  const [modalImage, setModalImage] = useState<{ src: string, title: string } | null>(null)
   const raf = useRef<number | null>(null)
   const startTs = useRef<number | null>(null)
 
@@ -123,19 +124,30 @@ export function ModelShowcase({
                 startTs.current = null
                 setProgress(0)
               }}
+              onDoubleClick={() => {
+                const title = code === "A1" ? "A1 Smallholder Model" : "A2 Commercial Model"
+                const src = code === "A1" 
+                  ? "https://images.unsplash.com/photo-1592419044706-39796d40f98c?q=80&w=1200&auto=format&fit=crop" // Representative A1
+                  : "https://images.unsplash.com/photo-1624720114708-0cbd6ee41f4e?q=80&w=1200&auto=format&fit=crop" // Representative A2
+                setModalImage({ src, title })
+              }}
               className={cn(
-                "relative z-10 py-2 px-3 rounded-full text-xs font-semibold tracking-wider transition-colors",
+                "relative z-10 py-2 px-3 rounded-full text-xs font-semibold tracking-wider transition-all active:scale-95 group/btn",
                 active === code
                   ? "text-white"
                   : "text-muted-foreground hover:text-foreground",
               )}
+              title={`Switch to ${code} (Double-click to see enhanced view)`}
             >
-              <span className="relative z-10">
+              <span className="relative z-10 flex items-center justify-center gap-1.5">
                 {code} · {region.models[code].label.split(" ")[1]}
+                {active === code && (
+                  <div className="h-1 w-1 rounded-full bg-white/60 animate-pulse" />
+                )}
               </span>
               {active === code && (
                 <span
-                  className="absolute inset-0 rounded-full transition-all"
+                  className="absolute inset-0 rounded-full transition-all shadow-lg"
                   style={{ backgroundColor: region.colorVar }}
                   aria-hidden
                 />
@@ -160,7 +172,21 @@ export function ModelShowcase({
 
       {/* Model body */}
       <div key={active} className="p-5 animate-in fade-in slide-in-from-bottom-1 duration-300 flex-1 flex flex-col gap-4">
-        <ModelHeadline model={model} colorVar={region.colorVar} />
+        <ModelHeadline 
+          model={model} 
+          colorVar={region.colorVar} 
+          onShowEnhanced={() => {
+            const title = active === "A1" ? `${region.roman} · A1 Smallholder Model` : `${region.roman} · A2 Commercial Model`
+            const srcs = {
+              1: "https://images.unsplash.com/photo-1597484662317-9bd76add240a?q=80&w=1200&auto=format&fit=crop",
+              2: "https://images.unsplash.com/photo-1594750013233-0498305f23bc?q=80&w=1200&auto=format&fit=crop",
+              3: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1200&auto=format&fit=crop",
+              4: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop",
+              5: "https://images.unsplash.com/photo-1516422317184-3388bc6768b2?q=80&w=1200&auto=format&fit=crop"
+            }
+            setModalImage({ src: srcs[region.id as keyof typeof srcs], title })
+          }}
+        />
 
         <div className="grid md:grid-cols-2 gap-4 flex-1">
           <div className="rounded-xl border border-border/60 bg-background/60 p-4">
@@ -221,6 +247,48 @@ export function ModelShowcase({
           </div>
         </div>
       </div>
+      {/* Enhanced View Modal */}
+      {modalImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300"
+          onClick={() => setModalImage(null)}
+        >
+          <div 
+            className="relative max-w-5xl w-full glass rounded-3xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="absolute top-4 right-4 z-10">
+              <button 
+                onClick={() => setModalImage(null)}
+                className="h-10 w-10 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-md text-white flex items-center justify-center transition"
+              >
+                <Pause className="h-5 w-5 rotate-45" />
+              </button>
+            </div>
+            <div className="aspect-[16/10] relative">
+              <img 
+                src={modalImage.src} 
+                alt={modalImage.title}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <div className="text-xs tracking-[0.3em] uppercase font-bold text-accent mb-2">
+                  Enhanced Visualization · Region {region.roman}
+                </div>
+                <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-4">
+                  {modalImage.title}
+                </h2>
+                <p className="text-white/80 max-w-2xl text-sm md:text-base leading-relaxed">
+                  {active === "A1" 
+                    ? `A closer look at the A1 smallholder farming model in Region ${region.roman}. This model focuses on intensive land use, diverse crop rotation (like ${model.enterprises[0]?.name}), and community-centric homesteads.`
+                    : `An aerial perspective of the A2 commercial model in Region ${region.roman}. Characterized by larger scales, professional infrastructure (like ${model.plotSize} plots), and mechanized systems optimized for this agro-ecological zone.`}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -228,9 +296,11 @@ export function ModelShowcase({
 function ModelHeadline({
   model,
   colorVar,
+  onShowEnhanced,
 }: {
   model: FarmModel
   colorVar: string
+  onShowEnhanced: () => void
 }) {
   const imgSrc =
     model.code === "A1" ? "/images/model-a1.jpg" : "/images/model-a2.jpg"
@@ -266,14 +336,18 @@ function ModelHeadline({
         </div>
       </div>
 
-      <div className="min-w-0 flex-1">
-        <div className="font-serif text-lg md:text-xl font-semibold leading-tight">
+      <button 
+        onClick={onShowEnhanced}
+        className="min-w-0 flex-1 text-left group/head transition-transform active:scale-95"
+      >
+        <div className="font-serif text-lg md:text-xl font-semibold leading-tight group-hover/head:text-primary transition-colors flex items-center gap-2">
           {model.label}
+          <div className="h-1.5 w-1.5 rounded-full bg-primary opacity-0 group-hover/head:opacity-100 transition-opacity" />
         </div>
-        <div className="text-[12px] text-muted-foreground">
+        <div className="text-[12px] text-muted-foreground group-hover/head:text-foreground/80 transition-colors">
           {model.subtitle}
         </div>
-      </div>
+      </button>
       <div className="ml-auto flex items-center gap-2 shrink-0">
         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-background text-[11px] font-mono">
           <Ruler className="h-3 w-3 text-muted-foreground" />

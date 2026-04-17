@@ -21,6 +21,8 @@ export type Region = {
   roman: "I" | "II" | "III" | "IV" | "V"
   name: string
   tagline: string
+  heroTitle: string
+  description: string
   rainfall: string
   rainfallMin: number
   rainfallMax: number
@@ -28,7 +30,6 @@ export type Region = {
   soilQuality: "VERY RICH" | "RICH" | "MODERATE" | "LOW" | "MARGINAL"
   provinces: string[]
   potential: string[]
-  summary: string
   colorVar: string // css variable
   colorClass: string
   models: {
@@ -43,6 +44,7 @@ export const regions: Region[] = [
     roman: "I",
     name: "The Eastern Highlands",
     tagline: "Zimbabwe's lush green crown",
+    heroTitle: "Eastern Highlands",
     rainfall: ">1000 mm (rain possible all year)",
     rainfallMin: 1000,
     rainfallMax: 1400,
@@ -55,7 +57,7 @@ export const regions: Region[] = [
       "Forestry (timber — pine, eucalyptus)",
       "Dairy and intensive beekeeping",
     ],
-    summary:
+    description:
       "The wettest, coolest, and most fertile region in Zimbabwe — ideal for specialty and high-value crops.",
     colorVar: "#064e3b", // deep forest green
     colorClass: "bg-[#064e3b]",
@@ -115,6 +117,7 @@ export const regions: Region[] = [
     roman: "II",
     name: "The Agricultural Heartland",
     tagline: "The breadbasket of Zimbabwe",
+    heroTitle: "Agricultural Heartland",
     rainfall: "700 – 1050 mm (summer)",
     rainfallMin: 700,
     rainfallMax: 1050,
@@ -132,7 +135,7 @@ export const regions: Region[] = [
       "Horticulture",
       "Poultry and dairy",
     ],
-    summary:
+    description:
       "Reliable summer rainfall and rich sandy loams make this the engine of Zimbabwe's commercial agriculture.",
     colorVar: "#065f46", // rich meadow green
     colorClass: "bg-[#065f46]",
@@ -192,6 +195,7 @@ export const regions: Region[] = [
     roman: "III",
     name: "The Transition Zone",
     tagline: "Mixed systems — cropping + livestock",
+    heroTitle: "Transition Zone",
     rainfall: "500 – 700 mm (erratic, dry spells)",
     rainfallMin: 500,
     rainfallMax: 700,
@@ -204,7 +208,7 @@ export const regions: Region[] = [
       "Cotton, groundnuts, sunflower",
       "Extensive beef ranching",
     ],
-    summary:
+    description:
       "A transitional belt where farmers balance crops with livestock to manage erratic rainfall.",
     colorVar: "#15803d", // olive green
     colorClass: "bg-[#15803d]",
@@ -264,6 +268,7 @@ export const regions: Region[] = [
     roman: "IV",
     name: "The Semi-Arid Belt",
     tagline: "Drought grains + cattle country",
+    heroTitle: "Semi-Arid Belt",
     rainfall: "450 – 650 mm (frequent droughts)",
     rainfallMin: 450,
     rainfallMax: 650,
@@ -281,7 +286,7 @@ export const regions: Region[] = [
       "Groundnuts and cowpeas",
       "Agroforestry and indigenous fruits",
     ],
-    summary:
+    description:
       "Unreliable rainfall means small grains and livestock dominate — resilience is the name of the game.",
     colorVar: "#a16207", // harvest gold
     colorClass: "bg-[#a16207]",
@@ -341,6 +346,7 @@ export const regions: Region[] = [
     roman: "V",
     name: "The Dry Lowveld",
     tagline: "Game, irrigation schemes & extensive ranching",
+    heroTitle: "Dry Lowveld",
     rainfall: "<450 mm (very low, erratic)",
     rainfallMin: 300,
     rainfallMax: 450,
@@ -357,7 +363,7 @@ export const regions: Region[] = [
       "Extensive cattle ranching",
       "Citrus & horticulture under irrigation",
     ],
-    summary:
+    description:
       "The hottest, driest region — unsuited to rain-fed cropping, but home to Zimbabwe's great irrigation estates and wildlife economies.",
     colorVar: "#78350f", // earthy brown
     colorClass: "bg-[#78350f]",

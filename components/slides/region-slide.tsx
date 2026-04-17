@@ -3,7 +3,7 @@
 import { ZimbabweMap } from "@/components/zimbabwe-map"
 import { ModelShowcase } from "@/components/model-showcase"
 import { type Region } from "@/lib/regions"
-import { CloudRain, Layers, MapPin, Leaf, Check, Droplets } from "lucide-react"
+import { CloudRain, Layers, MapPin, Leaf, Check, Droplets, Zap } from "lucide-react"
 import { useCountUp } from "@/hooks/use-count-up"
 
 type Props = {
@@ -15,173 +15,104 @@ export function RegionSlide({ region }: Props) {
   const rainMax = useCountUp(region.rainfallMax, 1100)
 
   return (
-    <div className="h-full w-full grid lg:grid-cols-[0.95fr_1fr_1.15fr] gap-5 p-5 lg:p-6 overflow-y-auto">
-      {/* ============ Column 1 — identity + landscape hero + map ============ */}
-      <div className="flex flex-col gap-4 min-w-0">
-        {/* Landscape hero banner */}
-        <div className="relative rounded-2xl overflow-hidden border border-border/40 shadow-premium aspect-[4/3] lg:aspect-[5/4] transition-all duration-500">
-          <img
-            src={`/images/region-${region.id}.jpg`}
-            alt={`Landscape of ${region.name}, Zimbabwe`}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          {/* Tint with region color for cohesion */}
-          <div
-            className="absolute inset-0 mix-blend-multiply opacity-30"
-            aria-hidden
-            style={{ backgroundColor: region.colorVar }}
-          />
-          {/* Bottom-up gradient for legibility */}
-          <div
-            className="absolute inset-x-0 bottom-0 h-2/3"
-            aria-hidden
-            style={{
-              background:
-                "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.8) 100%)",
-            }}
-          />
-          {/* Roman numeral badge */}
-          <div
-            className="absolute top-3 left-3 h-12 w-12 rounded-xl flex items-center justify-center font-serif text-xl font-bold text-white shadow-md backdrop-blur-sm"
-            style={{ backgroundColor: region.colorVar }}
-          >
-            {region.roman}
-          </div>
-          {/* Name + tagline over gradient */}
-          <div className="absolute left-0 right-0 bottom-0 p-4 text-white">
-            <div className="text-[10px] tracking-[0.22em] uppercase font-semibold text-white/85">
-              Region {region.roman}
+    <div className="h-full w-full flex flex-col p-8 lg:p-14 animate-cinematic-in overflow-y-auto">
+      <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 flex-1 min-h-0">
+        {/* Left Column: Hero & Narrative */}
+        <div className="flex flex-col gap-10 min-w-0">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase font-bold text-accent">
+              <span className="px-2 py-0.5 rounded bg-accent/20 border border-accent/30 shadow-sm">Natural Region {region.roman}</span>
+              <span className="h-px w-8 bg-accent/30" />
+              Zimbabwe Agro-Ecological Survey
             </div>
-            <h2 className="font-serif text-2xl md:text-3xl font-semibold leading-tight text-balance drop-shadow">
-              {region.name}
+            <h2 className="font-serif text-6xl md:text-8xl font-bold text-cinematic leading-[0.95] text-balance">
+              {(region.heroTitle || region.name || "Natural Region").split(" ")[0]} <br />
+              <span className="text-primary italic">
+                {(region.heroTitle || region.name || "").split(" ").slice(1).join(" ")}
+              </span>
             </h2>
-            <div className="text-xs md:text-sm text-white/90 mt-0.5 italic">
-              {region.tagline}
-            </div>
           </div>
-        </div>
 
-        <p className="text-sm text-muted-foreground leading-relaxed text-pretty">
-          {region.summary}
-        </p>
+          <div className="relative aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-2xl group border border-white/10">
+            <img
+              src={`/images/region-${region.id}.jpg`}
+              alt={region.name}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[15000ms] group-hover:scale-110"
+            />
+            {/* Cinematic tint */}
+            <div 
+              className="absolute inset-0 mix-blend-multiply opacity-20"
+              style={{ backgroundColor: region.colorVar }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+            <div className="absolute bottom-10 left-10 right-10 flex items-end justify-between gap-8">
+              <div className="max-w-xl">
+                <p className="text-white/95 text-lg md:text-2xl font-medium leading-relaxed drop-shadow-2xl">
+                  {region.description}
+                </p>
+              </div>
+              <div className="hidden xl:block text-right shrink-0">
+                <div className="text-[10px] tracking-[0.3em] uppercase text-white/60 font-bold mb-2">Key Provinces</div>
+                <div className="text-white font-serif text-2xl drop-shadow-md">
+                  {region.provinces.join(" · ")}
+                </div>
+              </div>
+            </div>
+          </div>
 
-        {/* Animated rainfall band */}
-        <div className="rounded-xl border border-border/40 glass p-4 shadow-premium">
-          <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-semibold mb-2">
-            <Droplets className="h-3.5 w-3.5" />
-            Annual Rainfall
-          </div>
-          <div className="flex items-baseline gap-2">
-            <div
-              className="font-serif text-3xl font-semibold tabular-nums"
-              style={{ color: region.colorVar }}
-            >
-              {rainMin}
-            </div>
-            <div className="text-muted-foreground">–</div>
-            <div
-              className="font-serif text-3xl font-semibold tabular-nums"
-              style={{ color: region.colorVar }}
-            >
-              {rainMax}
-            </div>
-            <div className="text-xs text-muted-foreground ml-1">mm / yr</div>
-          </div>
-          <div className="mt-2 h-1.5 w-full rounded-full bg-muted overflow-hidden">
-            <div
-              className="h-full rounded-full animate-grow-bar"
-              style={{
-                width: `${Math.min(100, (region.rainfallMax / 1400) * 100)}%`,
-                backgroundColor: region.colorVar,
-                animationDuration: "1200ms",
-              }}
+          <div className="grid grid-cols-3 gap-8">
+            <StatCard
+              icon={<CloudRain className="h-6 w-6" />}
+              label="Annual Rainfall"
+              value={region.rainfall}
+              colorVar={region.colorVar}
+            />
+            <StatCard
+              icon={<Layers className="h-6 w-6" />}
+              label="Soil Quality"
+              value={region.soilQuality || region.soil}
+              colorVar={region.colorVar}
+            />
+            <StatCard
+              icon={<MapPin className="h-6 w-6" />}
+              label="Coverage"
+              value={`Region ${region.roman}`}
+              colorVar={region.colorVar}
             />
           </div>
-        </div>
 
-        <div className="mt-auto">
-          <ZimbabweMap
-            activeRegion={region.id}
-            interactive={false}
-            className="w-full"
-          />
-        </div>
-      </div>
-
-      {/* ============ Column 2 — facts + what thrives ============ */}
-      <div className="flex flex-col gap-3 min-w-0">
-        <div className="grid gap-3">
-          <StatCard
-            icon={<CloudRain className="h-4 w-4" />}
-            label="Rainfall Pattern"
-            value={region.rainfall}
-          />
-          <StatCard
-            icon={<Layers className="h-4 w-4" />}
-            label="Soil Type"
-            value={region.soil}
-            subValue={region.soilQuality}
-            subColor={region.colorVar}
-          />
-          <StatCard
-            icon={<MapPin className="h-4 w-4" />}
-            label="Provinces"
-            value={region.provinces.join(" · ")}
-          />
-        </div>
-
-        <div
-          className="rounded-2xl border border-border/40 glass p-5 relative overflow-hidden flex-1 shadow-premium"
-          style={{
-            backgroundImage: `linear-gradient(135deg, color-mix(in oklch, ${region.colorVar} 18%, transparent), transparent 70%)`,
-          }}
-        >
-          <div className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase text-muted-foreground font-semibold">
-            <Leaf className="h-3.5 w-3.5" />
-            Agricultural Potential
+{/* 
+          <div className="mt-auto flex items-center justify-center p-8 glass rounded-[2.5rem] h-48 relative overflow-hidden group">
+            <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity rotate-12 scale-150">
+               <ZimbabweMap
+                activeRegion={region.id}
+                showLabels={false}
+                interactive={false}
+              />
+            </div>
+            <div className="relative z-10 flex items-center gap-4 text-accent font-serif text-2xl font-bold">
+               <MapPin className="h-8 w-8" />
+               Geographical Context
+            </div>
           </div>
-          <h3 className="font-serif text-lg font-semibold mt-1 mb-3">
-            What thrives here
-          </h3>
-          <ul className="space-y-2.5">
-            {region.potential.map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[13.5px]">
-                <span
-                  className="mt-0.5 shrink-0 h-5 w-5 rounded-full flex items-center justify-center shadow-sm"
-                  style={{ backgroundColor: region.colorVar }}
-                >
-                  <Check className="h-3 w-3 text-white" strokeWidth={3} />
-                </span>
-                <span className="leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
+          */}
+        </div>
 
-          <div
-            className="absolute -bottom-10 -right-10 font-serif text-[180px] leading-none opacity-[0.08] select-none pointer-events-none"
-            style={{ color: region.colorVar }}
-          >
-            {region.roman}
+        {/* Right Column: Farming Models */}
+        <div className="flex flex-col gap-6 min-w-0 h-full overflow-hidden">
+          <div className="flex items-center justify-between mb-2">
+            <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-muted-foreground/60">
+              Agri-Business Models
+            </div>
+            <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] font-bold text-accent px-3 py-1 rounded-full bg-accent/10 border border-accent/20">
+              <Zap className="h-3 w-3" />
+              LIVE DATA
+            </div>
+          </div>
+          <div className="flex-1 min-h-0 glass rounded-[3rem] overflow-hidden shadow-2xl">
+            <ModelShowcase region={region} />
           </div>
         </div>
-
-        <div
-          className="rounded-xl p-3.5 text-xs italic border border-dashed"
-          style={{
-            borderColor: `color-mix(in oklch, ${region.colorVar} 45%, transparent)`,
-            backgroundColor: `color-mix(in oklch, ${region.colorVar} 6%, transparent)`,
-          }}
-        >
-          <span className="font-semibold not-italic text-foreground">
-            Key insight:
-          </span>{" "}
-          <span className="text-foreground/80">{region.tagline}.</span>
-        </div>
-      </div>
-
-      {/* ============ Column 3 — A1 / A2 model showcase ============ */}
-      <div className="min-w-0">
-        <ModelShowcase region={region} />
       </div>
     </div>
   )
@@ -191,30 +122,35 @@ function StatCard({
   icon,
   label,
   value,
-  subValue,
-  subColor,
+  colorVar,
 }: {
   icon: React.ReactNode
   label: string
   value: string
-  subValue?: string
-  subColor?: string
+  colorVar: string
 }) {
   return (
-    <div className="rounded-xl border border-border/40 bg-background/40 backdrop-blur-md p-3.5 shadow-sm transition-all hover:bg-background/60">
-      <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-semibold">
-        {icon}
-        {label}
-      </div>
-      <div className="mt-1 font-medium text-[13px] leading-snug">{value}</div>
-      {subValue && (
-        <div
-          className="mt-1.5 inline-block text-[9px] font-bold tracking-[0.2em] px-2 py-0.5 rounded-full text-white"
-          style={{ backgroundColor: subColor }}
-        >
-          {subValue}
+    <div className="glass group relative p-8 rounded-[2.5rem] transition-all hover:scale-105 active:scale-95 overflow-hidden border-white/5 shadow-2xl">
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity"
+        style={{ backgroundColor: colorVar }}
+      />
+      <div className="relative z-10">
+        <div className="flex items-center gap-3 mb-6">
+          <div 
+            className="h-12 w-12 rounded-[1.25rem] flex items-center justify-center text-white shadow-xl"
+            style={{ backgroundColor: colorVar }}
+          >
+            {icon}
+          </div>
+          <div className="text-[10px] tracking-[0.3em] uppercase font-bold text-muted-foreground/60 leading-none">
+            {label}
+          </div>
         </div>
-      )}
+        <div className="font-serif text-2xl font-bold leading-tight group-hover:text-primary transition-colors text-balance">
+          {value}
+        </div>
+      </div>
     </div>
   )
 }

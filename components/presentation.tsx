@@ -170,89 +170,81 @@ export function Presentation() {
   }
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-background bg-grain selection:bg-primary/20">
-      {/* Top bar */}
-      <header className="shrink-0 border-b border-border/40 bg-background/60 backdrop-blur-xl relative z-50">
-        <div className="mx-auto max-w-[1600px] px-4 md:px-6 h-14 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="h-12 w-12 shrink-0 flex items-center justify-center">
+    <div className="min-h-screen w-full flex flex-col bg-background bg-grain selection:bg-primary/20 overflow-hidden relative">
+      {/* Cinematic Overlays */}
+      <div className="fixed inset-0 pointer-events-none z-[100] vignette opacity-40" aria-hidden />
+      <div className="fixed inset-0 pointer-events-none z-[100] bg-topo opacity-[0.03]" aria-hidden />
+
+      {/* Top bar - Hidden on Title Slide for impact */}
+      <header className={cn(
+        "shrink-0 border-b border-white/5 bg-background/20 backdrop-blur-2xl relative z-50 transition-all duration-1000",
+        current === "title" ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
+      )}>
+        <div className="mx-auto max-w-[1600px] px-4 md:px-8 h-16 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4 min-w-0">
+            <div className="h-10 w-10 shrink-0 flex items-center justify-center glass rounded-xl">
               <img 
                 src="/images/logo.jpg" 
                 alt="Ministry of Lands Logo"
-                className="max-h-full max-w-full object-contain"
+                className="max-h-full max-w-full object-contain brightness-0 invert opacity-80"
                 loading="eager"
               />
             </div>
             <div className="min-w-0">
-              <div className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground font-semibold leading-none">
+              <div className="text-[9px] tracking-[0.4em] uppercase text-accent font-bold leading-none mb-1">
                 Ministry of Lands and Rural Development
               </div>
-              <div className="text-sm font-semibold truncate">
-                Zimbabwe&apos;s Five Natural Farming Regions
+              <div className="text-sm font-serif font-bold tracking-wide">
+                Zimbabwe&apos;s <span className="text-primary italic">Natural</span> Regions
               </div>
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1.5 glass px-4 py-2 rounded-full">
             {slides.map((s, i) => (
               <button
                 key={s.key}
                 onClick={() => go(i)}
                 aria-label={`Go to ${s.label}`}
-                title={s.label}
                 className={cn(
-                  "h-1.5 rounded-full transition-all",
+                  "h-1.5 rounded-full transition-all duration-500",
                   i === index
-                    ? "w-8 bg-primary"
-                    : "w-4 bg-border hover:bg-muted-foreground/40",
+                    ? "w-8 bg-accent"
+                    : "w-2 bg-white/20 hover:bg-white/40",
                 )}
               />
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <button
               onClick={() => setAutoPlay((p) => !p)}
               className={cn(
-                "h-8 px-2.5 rounded-full border text-[11px] font-semibold tracking-wider flex items-center gap-1.5 transition",
+                "h-9 px-4 rounded-full border text-[10px] font-bold tracking-[0.2em] flex items-center gap-2 transition-all active:scale-95 shadow-xl",
                 autoPlay
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/40",
+                  ? "bg-accent text-accent-foreground border-accent"
+                  : "glass text-white/60 hover:text-white hover:border-white/20",
               )}
-              title={autoPlay ? "Pause auto-play (P)" : "Start auto-play (P)"}
             >
-              {autoPlay ? (
-                <Pause className="h-3 w-3" />
-              ) : (
-                <Play className="h-3 w-3" />
-              )}
+              {autoPlay ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
               AUTO
             </button>
 
-            <div className="text-xs font-mono text-muted-foreground tabular-nums hidden sm:block">
-              {String(index + 1).padStart(2, "0")} /{" "}
-              {String(slides.length).padStart(2, "0")}
-            </div>
             <button
               onClick={toggleFullscreen}
-              className="h-8 w-8 rounded-md border border-border hover:border-foreground/40 flex items-center justify-center text-muted-foreground hover:text-foreground transition"
+              className="h-9 w-9 rounded-xl glass flex items-center justify-center text-white/60 hover:text-white transition-all active:scale-95 shadow-xl"
               aria-label="Toggle fullscreen"
-              title="Toggle fullscreen (F)"
             >
-              {isFullscreen ? (
-                <Minimize2 className="h-3.5 w-3.5" />
-              ) : (
-                <Maximize2 className="h-3.5 w-3.5" />
-              )}
+              {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
             </button>
           </div>
         </div>
 
-        {/* Auto-play progress strip (under header) */}
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-transparent pointer-events-none">
+        {/* Auto-play progress strip */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/5 pointer-events-none">
           {autoPlay && (
             <div
-              className="h-full bg-primary origin-left transition-transform"
+              className="h-full bg-accent origin-left transition-transform"
               style={{
                 transform: `scaleX(${slideProgress})`,
                 width: "100%",
@@ -263,78 +255,56 @@ export function Presentation() {
       </header>
 
       {/* Slide stage */}
-      <main className="flex-1 relative overflow-hidden">
+      <main className="flex-1 relative">
         <div
           key={current}
-          className="absolute inset-0 animate-in fade-in slide-in-from-bottom-2 duration-500 overflow-y-auto"
+          className="absolute inset-0 animate-cinematic-in"
         >
           {renderSlide()}
         </div>
       </main>
 
-      {/* Rotating ticker */}
-      <div className="shrink-0 border-t border-border/80 bg-primary/5 overflow-hidden">
-        <div className="mx-auto max-w-[1600px] px-4 md:px-6 h-8 flex items-center gap-3">
-          <div className="shrink-0 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.22em] uppercase text-primary">
-            <Wheat className="h-3 w-3" />
-            Live Tip
-          </div>
-          <div
-            key={tickerIdx}
-            className="text-xs text-foreground/80 truncate animate-in fade-in slide-in-from-right-4 duration-500"
-          >
-            {TICKER_MESSAGES[tickerIdx]}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom controls */}
-      <footer className="shrink-0 border-t border-border/40 bg-background/60 backdrop-blur-xl z-50">
-        <div className="mx-auto max-w-[1600px] px-4 md:px-6 h-14 flex items-center justify-between gap-4">
+      {/* Footer - Subtle & Cinematic */}
+      <footer className={cn(
+        "shrink-0 bg-background/20 backdrop-blur-2xl z-50 border-t border-white/5 transition-all duration-1000",
+        current === "title" ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
+      )}>
+        <div className="mx-auto max-w-[1600px] px-4 md:px-8 h-16 flex items-center justify-between gap-4">
           <button
             onClick={() => go(index - 1)}
             disabled={index === 0}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border text-sm hover:border-foreground/40 transition disabled:opacity-40 disabled:cursor-not-allowed"
+            className="group flex items-center gap-3 px-5 py-2.5 rounded-full glass text-xs font-bold tracking-[0.2em] hover:bg-white/10 transition-all disabled:opacity-20 disabled:cursor-not-allowed uppercase"
           >
-            <ChevronLeft className="h-4 w-4" />
-            <span className="hidden sm:inline">Previous</span>
+            <ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            Prev
           </button>
 
-          <div className="text-xs text-muted-foreground font-mono truncate flex items-center gap-3">
-            <span className="hidden md:inline-flex items-center gap-1">
-              <Tractor className="h-3 w-3" /> Booth Kiosk
-            </span>
-            <span className="hidden md:inline">·</span>
-            <span>
-              <kbd className="px-1.5 py-0.5 rounded border border-border bg-card mr-1">
-                ←
-              </kbd>
-              <kbd className="px-1.5 py-0.5 rounded border border-border bg-card mr-2">
-                →
-              </kbd>
-              nav
-            </span>
-            <span>
-              <kbd className="px-1.5 py-0.5 rounded border border-border bg-card">
-                P
-              </kbd>{" "}
-              auto
-            </span>
-            <span className="hidden md:inline">
-              <kbd className="px-1.5 py-0.5 rounded border border-border bg-card">
-                F
-              </kbd>{" "}
-              full
-            </span>
+          <div className="hidden md:flex items-center gap-6 glass px-6 py-2.5 rounded-full text-[9px] font-bold tracking-[0.3em] uppercase text-white/40">
+            <div className="flex items-center gap-2">
+              <Tractor className="h-3 w-3 text-accent" />
+              <span>Booth Mode</span>
+            </div>
+            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <div className="flex items-center gap-3">
+              <span className="flex gap-1.5"><kbd className="opacity-60">←</kbd> <kbd className="opacity-60">→</kbd></span>
+              <span className="opacity-40">Navigate</span>
+            </div>
+            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <div
+              key={tickerIdx}
+              className="text-white/60 min-w-0 max-w-sm animate-in fade-in slide-in-from-right-4 duration-500 leading-snug"
+            >
+              {TICKER_MESSAGES[tickerIdx]}
+            </div>
           </div>
 
           <button
             onClick={() => go(index + 1)}
             disabled={index === slides.length - 1}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary text-primary-foreground text-sm hover:opacity-90 transition disabled:opacity-40 disabled:cursor-not-allowed"
+            className="group flex items-center gap-3 px-6 py-2.5 rounded-full bg-accent text-accent-foreground text-xs font-bold tracking-[0.2em] hover:scale-105 active:scale-95 transition-all disabled:opacity-20 disabled:cursor-not-allowed uppercase shadow-xl"
           >
-            <span className="hidden sm:inline">Next</span>
-            <ChevronRight className="h-4 w-4" />
+            Next
+            <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
       </footer>

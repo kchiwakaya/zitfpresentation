@@ -40,10 +40,6 @@ export function ZimbabweMap({
   interactive = true,
   showLabels = true,
 }: Props) {
-  return null;
-
-  // The map is currently disabled per request.
-  // To restore, remove 'return null;' and the unreachable return below.
   return (
     <div className={cn("relative w-full aspect-[520/380]", className)}>
       <svg

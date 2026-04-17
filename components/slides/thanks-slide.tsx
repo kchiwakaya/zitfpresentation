@@ -64,9 +64,11 @@ export function ThanksSlide({ onRestart }: Props) {
 
         {/* Zimbabwe map recap — all five regions at a glance */}
         <div className="mt-10 flex flex-col items-center gap-4">
+{/* 
           <div className="w-full max-w-md mx-auto rounded-2xl border border-border bg-card/80 backdrop-blur-sm p-4 shadow-sm">
             <ZimbabweMap interactive={false} showLabels />
           </div>
+          */}
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5">
             {regions.map((r) => (
               <div

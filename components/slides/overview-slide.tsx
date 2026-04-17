@@ -20,6 +20,8 @@ export function OverviewSlide({ onJumpTo }: Props) {
   const raf = useRef<number | null>(null)
   const [progress, setProgress] = useState(0)
 
+  const SPOTLIGHT_MS = 4000
+
   // Auto-cycle spotlight through regions I → V on loop
   useEffect(() => {
     if (!autoSpotlight) {
@@ -48,21 +50,21 @@ export function OverviewSlide({ onJumpTo }: Props) {
   const active = hover ?? spotlight
 
   return (
-    <div className="h-full w-full grid lg:grid-cols-[1.1fr_1fr] gap-8 p-8 lg:p-12">
+    <div className="h-full w-full grid lg:grid-cols-[1.2fr_1fr] gap-12 p-12 lg:p-20 animate-cinematic-in">
       {/* Left — map */}
       <div className="flex flex-col min-w-0">
-        <div className="flex items-center gap-2 text-[10px] tracking-[0.22em] uppercase text-muted-foreground font-semibold">
-          <CloudRain className="h-3.5 w-3.5" />
-          Rainfall Gradient · East → West
+        <div className="flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase text-accent font-bold mb-4">
+          <CloudRain className="h-4 w-4" />
+          Interactive Agro-Ecological Map
         </div>
-        <div className="flex items-start justify-between gap-4 mt-2">
+        <div className="flex items-start justify-between gap-8 mb-12">
           <div>
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-balance">
-              Five regions, one country
+            <h2 className="font-serif text-5xl md:text-6xl font-bold text-cinematic leading-[1.1] text-balance">
+              Diversity in <br />
+              <span className="text-primary italic">Unity</span>
             </h2>
-            <p className="mt-2 text-sm text-muted-foreground max-w-md">
-              Click any region on the map — or in the list — to explore its
-              soils, provinces, and what A1 &amp; A2 farmers grow there.
+            <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed font-medium">
+              A precise mapping of Zimbabwe&apos;s natural potential. Select a region to explore local farming models and productivity.
             </p>
           </div>
           <button
@@ -72,43 +74,49 @@ export function OverviewSlide({ onJumpTo }: Props) {
               setProgress(0)
             }}
             className={cn(
-              "shrink-0 h-8 px-3 rounded-full border text-[11px] font-semibold tracking-wider flex items-center gap-1.5 transition",
+              "shrink-0 h-10 px-5 rounded-full border text-[10px] font-bold tracking-[0.2em] flex items-center gap-2 transition-all shadow-xl active:scale-95",
               autoSpotlight
                 ? "bg-primary text-primary-foreground border-primary"
-                : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/40",
+                : "border-border/40 text-muted-foreground hover:text-foreground hover:border-foreground/40 glass",
             )}
             title={autoSpotlight ? "Pause spotlight" : "Play spotlight"}
           >
             {autoSpotlight ? (
-              <Pause className="h-3 w-3" />
+              <Pause className="h-4 w-4" />
             ) : (
-              <Play className="h-3 w-3" />
+              <Play className="h-4 w-4" />
             )}
             SPOTLIGHT
           </button>
         </div>
 
-        <div className="mt-auto">
+{/* 
+        <div className="mt-auto relative group">
+          <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full scale-110 -z-10 transition-opacity opacity-50 group-hover:opacity-100" />
           <ZimbabweMap
             activeRegion={active}
             onSelect={(id) => onJumpTo(1 + id)} // slides[2..6] are regions I..V
-            className="max-w-xl mx-auto"
+            className="max-w-2xl mx-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
           />
+        </div> 
+        */}
+        <div className="mt-auto flex-1 flex items-center justify-center glass rounded-[3rem] p-12 text-muted-foreground italic border-dashed">
+          Interactive Map Temporarily Offline
         </div>
       </div>
 
       {/* Right — region list */}
-      <div className="flex flex-col gap-2 overflow-y-auto max-h-full min-w-0">
-        <div className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground font-semibold">
-          The Regions
+      <div className="flex flex-col gap-3 overflow-y-auto max-h-full min-w-0 pr-4 cinematic-scroll">
+        <div className="text-[10px] tracking-[0.4em] uppercase text-accent font-bold mb-2">
+          Region Index
         </div>
-        <div className="flex items-center justify-between">
-          <h3 className="font-serif text-xl font-semibold">
-            From wettest to driest
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-serif text-2xl font-bold">
+            Agro-Ecological Zones
           </h3>
-          <div className="flex items-center gap-1 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-semibold">
-            <Sparkles className="h-3 w-3" />
-            Auto-Tour
+          <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-bold">
+            <Sparkles className="h-4 w-4 text-accent" />
+            Guided Tour
           </div>
         </div>
 
@@ -171,14 +179,14 @@ export function OverviewSlide({ onJumpTo }: Props) {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline justify-between gap-3">
-                    <div className="font-serif text-[15.5px] font-semibold truncate">
+                    <div className="font-serif text-[15.5px] font-semibold leading-snug">
                       {r.name}
                     </div>
                     <div className="text-[10.5px] font-mono text-muted-foreground shrink-0 tabular-nums">
                       {r.rainfallMin}–{r.rainfallMax}mm
                     </div>
                   </div>
-                  <div className="text-[12.5px] text-muted-foreground truncate">
+                  <div className="text-[12.5px] text-muted-foreground leading-relaxed mt-0.5">
                     {r.tagline}
                   </div>
                 </div>
