@@ -53,7 +53,7 @@ export function ThanksSlide({ onRestart }: Props) {
           End of Presentation
         </div>
 
-        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-semibold leading-[0.9] tracking-tight">
+        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold leading-[0.9] tracking-tight">
           Thank <span className="italic text-primary">you</span>.
         </h1>
 

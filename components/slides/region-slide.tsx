@@ -18,14 +18,14 @@ export function RegionSlide({ region }: Props) {
     <div className="h-full w-full flex flex-col p-8 lg:p-14 animate-cinematic-in overflow-y-auto">
       <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 flex-1 min-h-0">
         {/* Left Column: Hero & Narrative */}
-        <div className="flex flex-col gap-10 min-w-0">
+        <div className="flex flex-col gap-6 min-w-0">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase font-bold text-accent-text">
               <span className="px-2 py-0.5 rounded bg-accent/20 border border-accent/30 shadow-sm">Natural Region {region.roman}</span>
               <span className="h-px w-8 bg-accent/30" />
               Zimbabwe Agro-Ecological Survey
             </div>
-            <h2 className="font-serif text-7xl md:text-9xl font-bold text-cinematic leading-[0.9] text-balance">
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-cinematic leading-[0.9] text-balance">
               {(region.heroTitle || region.name || "Natural Region").split(" ")[0]} <br />
               <span className="text-primary italic">
                 {(region.heroTitle || region.name || "").split(" ").slice(1).join(" ")}

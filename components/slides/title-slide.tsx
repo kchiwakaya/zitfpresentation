@@ -66,7 +66,7 @@ export function TitleSlide({ onStart, onStartAuto }: Props) {
               <span className="drop-shadow-sm">Ministry of Lands and Rural Development</span>
             </div>
 
-            <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-bold text-cinematic text-balance leading-[0.9] mb-8 text-white">
+            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-cinematic text-balance leading-[0.9] mb-8 text-white">
               Zimbabwe&apos;s<br />
               <span className="text-shimmer italic">Natural</span> Regions
             </h1>
