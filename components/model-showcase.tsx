@@ -78,9 +78,9 @@ export function ModelShowcase({
 
   return (
     <div
-      className="rounded-2xl border border-border/40 glass overflow-hidden flex flex-col shadow-premium transition-all duration-500"
+      className="rounded-[3rem] border border-white/10 glass-premium overflow-hidden flex flex-col transition-all duration-700 shadow-2xl"
       style={{
-        backgroundImage: `linear-gradient(135deg, color-mix(in oklch, ${region.colorVar} 12%, transparent), transparent 70%)`,
+        backgroundImage: `linear-gradient(135deg, color-mix(in oklch, ${region.colorVar} 15%, transparent), transparent 70%)`,
       }}
     >
       {/* Header with toggle + auto-play */}
@@ -171,7 +171,7 @@ export function ModelShowcase({
       </div>
 
       {/* Model body */}
-      <div key={active} className="p-5 animate-in fade-in slide-in-from-bottom-1 duration-300 flex-1 flex flex-col gap-4">
+      <div key={active} className="p-8 md:p-10 animate-in fade-in slide-in-from-bottom-2 duration-500 flex-1 flex flex-col gap-8 overflow-y-auto min-h-0 cinematic-scroll">
         <ModelHeadline 
           model={model} 
           colorVar={region.colorVar} 

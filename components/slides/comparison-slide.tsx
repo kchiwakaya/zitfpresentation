@@ -35,7 +35,7 @@ export function ComparisonSlide() {
         </div>
 
         {/* Takeaway grid */}
-        <div className="grid grid-cols-1 gap-3 content-start">
+        <div className="grid grid-cols-1 gap-3 content-start overflow-y-auto pr-2 cinematic-scroll">
           {regions.map((r) => {
             const isActive = active === r.id
             return (
@@ -45,8 +45,8 @@ export function ComparisonSlide() {
                 onMouseLeave={() => setActive(null)}
                 className={`text-left rounded-xl border bg-card px-4 py-3 transition-all ${
                   isActive
-                    ? "border-foreground/40 shadow-sm"
-                    : "border-border"
+                    ? "border-foreground/40 shadow-premium scale-[1.02] bg-background/80"
+                    : "border-border/60 hover:border-foreground/30 glass hover:scale-[1.01]"
                 }`}
               >
                 <div className="flex items-center gap-3">

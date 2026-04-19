@@ -234,6 +234,30 @@
   transform: translateZ(-1px) scale(2);
 }
 
+/* Cinematic scrollbar styling */
+.cinematic-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+.cinematic-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.cinematic-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cinematic-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--primary) 20%, transparent);
+  border-radius: 10px;
+}
+
+.cinematic-scroll::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--primary) 40%, transparent);
+}
+
 @media (pointer: fine) {
   body {
     cursor: crosshair;
@@ -241,4 +265,70 @@
   a, button {
     cursor: pointer;
   }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Glassmorphism refinements */
+.glass-premium {
+  @apply bg-white/5 backdrop-blur-3xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+}
+
+/* Premium landing page utilities */
+.text-shimmer {
+  background: linear-gradient(
+    to right,
+    oklch(0.75 0.18 80) 20%,
+    oklch(0.95 0.1 80) 40%,
+    oklch(0.95 0.1 80) 60%,
+    oklch(0.75 0.18 80) 80%
+  );
+  background-size: 200% auto;
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.glow-premium {
+  box-shadow: 0 0 20px oklch(0.75 0.18 80 / 0.2), 0 0 40px oklch(0.75 0.18 80 / 0.1);
+}
+
+.glass-luxe {
+  @apply bg-white/10 backdrop-blur-3xl border border-white/20 shadow-2xl;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33% { transform: translateY(-20px) translateX(10px); }
+  66% { transform: translateY(10px) translateX(-15px); }
+}
+.animate-float {
+  animation: float 12s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 15s ease-in-out infinite;
+  animation-delay: 2s;
 }

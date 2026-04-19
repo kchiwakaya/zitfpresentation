@@ -90,18 +90,27 @@ export function OverviewSlide({ onJumpTo }: Props) {
           </button>
         </div>
 
-{/* 
-        <div className="mt-auto relative group">
-          <div className="absolute inset-0 bg-primary/5 blur-[120px] rounded-full scale-110 -z-10 transition-opacity opacity-50 group-hover:opacity-100" />
-          <ZimbabweMap
-            activeRegion={active}
-            onSelect={(id) => onJumpTo(1 + id)} // slides[2..6] are regions I..V
-            className="max-w-2xl mx-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
-          />
-        </div> 
-        */}
-        <div className="mt-auto flex-1 flex items-center justify-center glass rounded-[3rem] p-12 text-muted-foreground italic border-dashed">
-          Interactive Map Temporarily Offline
+        <div className="mt-auto relative group flex-1 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-primary/10 blur-[120px] rounded-full scale-110 -z-10 transition-opacity opacity-50 group-hover:opacity-100" />
+          <div className="relative w-full max-w-2xl aspect-[1/1] glass rounded-[4rem] overflow-hidden border-white/20 shadow-2xl group-hover:scale-[1.01] transition-all duration-700 bg-white/5 p-8">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Zimbabwe_map.svg/1000px-Zimbabwe_map.svg.png" 
+              alt="Agro-Ecological Regions of Zimbabwe"
+              className="w-full h-full object-contain brightness-110 contrast-125 transition-all duration-700 group-hover:scale-105"
+            />
+            {/* Legend Overlay */}
+            <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between gap-4 p-5 glass rounded-3xl border-white/10 shadow-2xl">
+              <div className="flex items-center gap-4">
+                <div className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase">Topographic Survey</div>
+                <div className="h-px w-8 bg-border" />
+                <div className="text-[10px] font-bold text-primary uppercase">Natural Regions I - V</div>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/20">
+                <div className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                <span className="text-[9px] font-bold text-accent uppercase tracking-tighter">Live Reference</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -130,7 +139,7 @@ export function OverviewSlide({ onJumpTo }: Props) {
               onMouseLeave={() => setHover(null)}
               onClick={() => onJumpTo(1 + r.id)}
               className={cn(
-                "group relative text-left rounded-xl border p-3.5 transition-all overflow-hidden",
+                "group relative text-left rounded-2xl border p-5 transition-all overflow-hidden",
                 isActive
                   ? "border-foreground/40 shadow-premium scale-[1.02] bg-background/80"
                   : "border-border/60 hover:border-foreground/30 glass hover:scale-[1.01]",
@@ -156,7 +165,7 @@ export function OverviewSlide({ onJumpTo }: Props) {
               )}
               <div className="flex items-center gap-4">
                 {/* Landscape thumbnail */}
-                <div className="relative shrink-0 h-14 w-20 rounded-lg overflow-hidden shadow-sm">
+                <div className="relative shrink-0 h-16 w-24 rounded-xl overflow-hidden shadow-md">
                   <img
                     src={`/images/region-${r.id}.jpg`}
                     alt=""
@@ -164,12 +173,12 @@ export function OverviewSlide({ onJumpTo }: Props) {
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div
-                    className="absolute inset-0 mix-blend-multiply opacity-35"
+                    className="absolute inset-0 mix-blend-multiply opacity-25"
                     aria-hidden
                     style={{ backgroundColor: r.colorVar }}
                   />
                   <div
-                    className="absolute bottom-0 left-0 right-0 flex items-center justify-center font-serif text-[11px] font-bold text-white tracking-wider"
+                    className="absolute bottom-0 left-0 right-0 flex items-center justify-center font-serif text-[12px] font-bold text-white tracking-wider py-0.5"
                     style={{
                       backgroundColor: `color-mix(in oklch, ${r.colorVar} 80%, black)`,
                     }}

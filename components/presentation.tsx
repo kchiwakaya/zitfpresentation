@@ -182,19 +182,19 @@ export function Presentation() {
       )}>
         <div className="mx-auto max-w-[1600px] px-4 md:px-8 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4 min-w-0">
-            <div className="h-10 w-10 shrink-0 flex items-center justify-center glass rounded-xl">
+            <div className="h-11 w-11 shrink-0 flex items-center justify-center bg-white rounded-full p-1.5 shadow-[0_0_20px_rgba(255,255,255,0.3)] border border-white/40">
               <img 
                 src="/images/logo.jpg" 
                 alt="Ministry of Lands Logo"
-                className="max-h-full max-w-full object-contain brightness-0 invert opacity-80"
+                className="max-h-full max-w-full object-contain rounded-full"
                 loading="eager"
               />
             </div>
             <div className="min-w-0">
-              <div className="text-[9px] tracking-[0.4em] uppercase text-accent font-bold leading-none mb-1">
+              <div className="text-[9px] tracking-[0.4em] uppercase text-white font-bold leading-none mb-1.5">
                 Ministry of Lands and Rural Development
               </div>
-              <div className="text-sm font-serif font-bold tracking-wide">
+              <div className="text-sm font-serif font-bold tracking-wide text-white/90">
                 Zimbabwe&apos;s <span className="text-primary italic">Natural</span> Regions
               </div>
             </div>

@@ -25,7 +25,7 @@ export function RegionSlide({ region }: Props) {
               <span className="h-px w-8 bg-accent/30" />
               Zimbabwe Agro-Ecological Survey
             </div>
-            <h2 className="font-serif text-6xl md:text-8xl font-bold text-cinematic leading-[0.95] text-balance">
+            <h2 className="font-serif text-7xl md:text-9xl font-bold text-cinematic leading-[0.9] text-balance">
               {(region.heroTitle || region.name || "Natural Region").split(" ")[0]} <br />
               <span className="text-primary italic">
                 {(region.heroTitle || region.name || "").split(" ").slice(1).join(" ")}
@@ -33,7 +33,7 @@ export function RegionSlide({ region }: Props) {
             </h2>
           </div>
 
-          <div className="relative aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-2xl group border border-white/10">
+          <div className="relative aspect-[21/9] min-h-[400px] rounded-[3rem] overflow-hidden shadow-2xl group border border-white/10">
             <img
               src={`/images/region-${region.id}.jpg`}
               alt={region.name}
@@ -44,17 +44,19 @@ export function RegionSlide({ region }: Props) {
               className="absolute inset-0 mix-blend-multiply opacity-20"
               style={{ backgroundColor: region.colorVar }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-            <div className="absolute bottom-10 left-10 right-10 flex items-end justify-between gap-8">
-              <div className="max-w-xl">
-                <p className="text-white/95 text-lg md:text-2xl font-medium leading-relaxed drop-shadow-2xl">
-                  {region.description}
-                </p>
-              </div>
-              <div className="hidden xl:block text-right shrink-0">
-                <div className="text-[10px] tracking-[0.3em] uppercase text-white/60 font-bold mb-2">Key Provinces</div>
-                <div className="text-white font-serif text-2xl drop-shadow-md">
-                  {region.provinces.join(" · ")}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent" />
+            <div className="absolute inset-0 p-10 md:p-14 flex flex-col justify-end overflow-y-auto cinematic-scroll">
+              <div className="flex flex-col md:flex-row items-end justify-between gap-12">
+                <div className="max-w-xl">
+                  <p className="text-white/95 text-xl md:text-3xl font-medium leading-relaxed drop-shadow-2xl text-pretty">
+                    {region.description}
+                  </p>
+                </div>
+                <div className="hidden xl:block text-right shrink-0">
+                  <div className="text-[10px] tracking-[0.4em] uppercase text-white/60 font-bold mb-3">Key Provinces</div>
+                  <div className="text-white font-serif text-3xl drop-shadow-md">
+                    {region.provinces.join(" · ")}
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,7 +101,7 @@ export function RegionSlide({ region }: Props) {
         </div>
 
         {/* Right Column: Farming Models */}
-        <div className="flex flex-col gap-6 min-w-0 h-full overflow-hidden">
+        <div className="flex flex-col gap-6 min-w-0 flex-1">
           <div className="flex items-center justify-between mb-2">
             <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-muted-foreground/60">
               Agri-Business Models
@@ -109,7 +111,7 @@ export function RegionSlide({ region }: Props) {
               LIVE DATA
             </div>
           </div>
-          <div className="flex-1 min-h-0 glass rounded-[3rem] overflow-hidden shadow-2xl">
+          <div className="flex-1 min-h-0 glass rounded-[3rem] overflow-y-auto shadow-2xl cinematic-scroll">
             <ModelShowcase region={region} />
           </div>
         </div>
@@ -130,24 +132,24 @@ function StatCard({
   colorVar: string
 }) {
   return (
-    <div className="glass group relative p-8 rounded-[2.5rem] transition-all hover:scale-105 active:scale-95 overflow-hidden border-white/5 shadow-2xl">
+    <div className="glass group relative p-10 rounded-[3rem] transition-all hover:scale-105 active:scale-95 overflow-hidden border-white/5 shadow-2xl">
       <div 
         className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity"
         style={{ backgroundColor: colorVar }}
       />
       <div className="relative z-10">
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-4 mb-8">
           <div 
-            className="h-12 w-12 rounded-[1.25rem] flex items-center justify-center text-white shadow-xl"
+            className="h-14 w-14 rounded-[1.5rem] flex items-center justify-center text-white shadow-xl"
             style={{ backgroundColor: colorVar }}
           >
             {icon}
           </div>
-          <div className="text-[10px] tracking-[0.3em] uppercase font-bold text-muted-foreground/60 leading-none">
+          <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-muted-foreground/60 leading-none">
             {label}
           </div>
         </div>
-        <div className="font-serif text-2xl font-bold leading-tight group-hover:text-primary transition-colors text-balance">
+        <div className="font-serif text-2xl md:text-3xl font-bold leading-tight group-hover:text-primary transition-colors text-pretty break-words">
           {value}
         </div>
       </div>

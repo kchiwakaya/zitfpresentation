@@ -98,15 +98,15 @@ export function QuestionSlide() {
                 onClick={() => picked === null && setPicked(r.id)}
                 disabled={picked !== null}
                 className={cn(
-                  "group relative rounded-2xl border-2 p-4 text-left transition-all",
-                  "disabled:cursor-default",
-                  picked === null && "hover:scale-[1.02] hover:shadow-md",
-                  isPicked && showAsCorrect && "border-green-600",
-                  showAsWrong && "border-red-500",
+                  "group relative rounded-[2rem] border transition-all overflow-hidden",
+                  "disabled:cursor-default shadow-xl",
+                  picked === null && "hover:scale-[1.05] hover:shadow-2xl",
+                  isPicked && showAsCorrect && "border-green-500/50 ring-2 ring-green-500/20",
+                  showAsWrong && "border-red-500/50 ring-2 ring-red-500/20",
                   !isPicked &&
                     !showAsCorrect &&
-                    "border-border hover:border-foreground/30",
-                  picked !== null && !isPicked && !showAsCorrect && "opacity-40",
+                    "border-white/10 glass hover:border-white/20",
+                  picked !== null && !isPicked && !showAsCorrect && "opacity-30 grayscale-[0.5]",
                 )}
                 style={{
                   backgroundColor: isPicked
@@ -115,6 +115,7 @@ export function QuestionSlide() {
                   color: isPicked ? "white" : "inherit",
                 }}
               >
+                <div className="p-5 flex flex-col h-full justify-between relative z-10">
                 <div
                   className="font-serif text-3xl font-bold"
                   style={{ color: isPicked ? "white" : r.colorVar }}
@@ -123,7 +124,7 @@ export function QuestionSlide() {
                 </div>
                 <div
                   className={cn(
-                    "text-xs mt-1 font-medium",
+                    "text-[10px] sm:text-xs mt-1 font-medium leading-tight",
                     isPicked ? "text-white/90" : "text-muted-foreground",
                   )}
                 >
@@ -140,6 +141,7 @@ export function QuestionSlide() {
                     <X className="h-3.5 w-3.5 text-white" strokeWidth={3} />
                   </div>
                 )}
+                </div>
               </button>
             )
           })}
