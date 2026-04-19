@@ -106,7 +106,7 @@ export function QuestionSlide() {
                   !isPicked &&
                     !showAsCorrect &&
                     "border-white/10 glass hover:border-white/20",
-                  picked !== null && !isPicked && !showAsCorrect && "opacity-30 grayscale-[0.5]",
+                  picked !== null && !isPicked && !showAsCorrect && "opacity-50 grayscale-[0.5]",
                 )}
                 style={{
                   backgroundColor: isPicked

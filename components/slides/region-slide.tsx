@@ -20,7 +20,7 @@ export function RegionSlide({ region }: Props) {
         {/* Left Column: Hero & Narrative */}
         <div className="flex flex-col gap-10 min-w-0">
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase font-bold text-accent">
+            <div className="flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase font-bold text-accent-text">
               <span className="px-2 py-0.5 rounded bg-accent/20 border border-accent/30 shadow-sm">Natural Region {region.roman}</span>
               <span className="h-px w-8 bg-accent/30" />
               Zimbabwe Agro-Ecological Survey
@@ -53,7 +53,7 @@ export function RegionSlide({ region }: Props) {
                   </p>
                 </div>
                 <div className="hidden xl:block text-right shrink-0">
-                  <div className="text-[10px] tracking-[0.4em] uppercase text-white/60 font-bold mb-3">Key Provinces</div>
+                  <div className="text-[10px] tracking-[0.4em] uppercase text-white/80 font-bold mb-3">Key Provinces</div>
                   <div className="text-white font-serif text-3xl drop-shadow-md">
                     {region.provinces.join(" · ")}
                   </div>
@@ -103,10 +103,10 @@ export function RegionSlide({ region }: Props) {
         {/* Right Column: Farming Models */}
         <div className="flex flex-col gap-6 min-w-0 flex-1">
           <div className="flex items-center justify-between mb-2">
-            <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-muted-foreground/60">
+            <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-muted-foreground">
               Agri-Business Models
             </div>
-            <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] font-bold text-accent px-3 py-1 rounded-full bg-accent/10 border border-accent/20">
+            <div className="flex items-center gap-2 text-[10px] tracking-[0.2em] font-bold text-accent-text px-3 py-1 rounded-full bg-accent/10 border border-accent/20">
               <Zap className="h-3 w-3" />
               LIVE DATA
             </div>
@@ -145,7 +145,7 @@ function StatCard({
           >
             {icon}
           </div>
-          <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-muted-foreground/60 leading-none">
+          <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-muted-foreground leading-none">
             {label}
           </div>
         </div>

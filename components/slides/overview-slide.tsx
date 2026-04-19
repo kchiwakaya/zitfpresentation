@@ -53,7 +53,7 @@ export function OverviewSlide({ onJumpTo }: Props) {
     <div className="h-full w-full grid lg:grid-cols-[1.2fr_1fr] gap-12 p-12 lg:p-20 animate-cinematic-in">
       {/* Left — map */}
       <div className="flex flex-col min-w-0">
-        <div className="flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase text-accent font-bold mb-4">
+        <div className="flex items-center gap-3 text-[10px] tracking-[0.4em] uppercase text-accent-text font-bold mb-4">
           <CloudRain className="h-4 w-4" />
           Interactive Agro-Ecological Map
         </div>
@@ -107,7 +107,7 @@ export function OverviewSlide({ onJumpTo }: Props) {
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/10 border border-accent/20">
                 <div className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-                <span className="text-[9px] font-bold text-accent uppercase tracking-tighter">Live Reference</span>
+                <span className="text-[9px] font-bold text-accent-text uppercase tracking-tighter">Live Reference</span>
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@ export function OverviewSlide({ onJumpTo }: Props) {
 
       {/* Right — region list */}
       <div className="flex flex-col gap-3 overflow-y-auto max-h-full min-w-0 pr-4 cinematic-scroll">
-        <div className="text-[10px] tracking-[0.4em] uppercase text-accent font-bold mb-2">
+        <div className="text-[10px] tracking-[0.4em] uppercase text-accent-text font-bold mb-2">
           Region Index
         </div>
         <div className="flex items-center justify-between mb-4">

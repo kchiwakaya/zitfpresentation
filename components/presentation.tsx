@@ -177,7 +177,7 @@ export function Presentation() {
 
       {/* Top bar - Hidden on Title Slide for impact */}
       <header className={cn(
-        "shrink-0 border-b border-white/5 bg-background/20 backdrop-blur-2xl relative z-50 transition-all duration-1000",
+        "shrink-0 border-b border-foreground/5 bg-background/80 backdrop-blur-2xl relative z-50 transition-all duration-1000",
         current === "title" ? "-translate-y-full opacity-0" : "translate-y-0 opacity-100"
       )}>
         <div className="mx-auto max-w-[1600px] px-4 md:px-8 h-16 flex items-center justify-between gap-4">
@@ -191,10 +191,10 @@ export function Presentation() {
               />
             </div>
             <div className="min-w-0">
-              <div className="text-[9px] tracking-[0.4em] uppercase text-white font-bold leading-none mb-1.5">
+              <div className="text-[9px] tracking-[0.4em] uppercase text-foreground font-bold leading-none mb-1.5">
                 Ministry of Lands and Rural Development
               </div>
-              <div className="text-sm font-serif font-bold tracking-wide text-white/90">
+              <div className="text-sm font-serif font-bold tracking-wide text-foreground/90">
                 Zimbabwe&apos;s <span className="text-primary italic">Natural</span> Regions
               </div>
             </div>
@@ -210,7 +210,7 @@ export function Presentation() {
                   "h-1.5 rounded-full transition-all duration-500",
                   i === index
                     ? "w-8 bg-accent"
-                    : "w-2 bg-white/20 hover:bg-white/40",
+                    : "w-2 bg-foreground/10 hover:bg-foreground/20",
                 )}
               />
             ))}
@@ -223,7 +223,7 @@ export function Presentation() {
                 "h-9 px-4 rounded-full border text-[10px] font-bold tracking-[0.2em] flex items-center gap-2 transition-all active:scale-95 shadow-xl",
                 autoPlay
                   ? "bg-accent text-accent-foreground border-accent"
-                  : "glass text-white/60 hover:text-white hover:border-white/20",
+                  : "glass text-foreground/60 hover:text-foreground hover:border-foreground/20",
               )}
             >
               {autoPlay ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
@@ -232,7 +232,7 @@ export function Presentation() {
 
             <button
               onClick={toggleFullscreen}
-              className="h-9 w-9 rounded-xl glass flex items-center justify-center text-white/60 hover:text-white transition-all active:scale-95 shadow-xl"
+              className="h-9 w-9 rounded-xl glass flex items-center justify-center text-foreground/60 hover:text-foreground transition-all active:scale-95 shadow-xl"
               aria-label="Toggle fullscreen"
             >
               {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
@@ -266,7 +266,7 @@ export function Presentation() {
 
       {/* Footer - Subtle & Cinematic */}
       <footer className={cn(
-        "shrink-0 bg-background/20 backdrop-blur-2xl z-50 border-t border-white/5 transition-all duration-1000",
+        "shrink-0 bg-background/80 backdrop-blur-2xl z-50 border-t border-foreground/5 transition-all duration-1000",
         current === "title" ? "translate-y-full opacity-0" : "translate-y-0 opacity-100"
       )}>
         <div className="mx-auto max-w-[1600px] px-4 md:px-8 h-16 flex items-center justify-between gap-4">
@@ -279,20 +279,20 @@ export function Presentation() {
             Prev
           </button>
 
-          <div className="hidden md:flex items-center gap-6 glass px-6 py-2.5 rounded-full text-[9px] font-bold tracking-[0.3em] uppercase text-white/40">
+          <div className="hidden md:flex items-center gap-6 glass px-6 py-2.5 rounded-full text-[9px] font-bold tracking-[0.3em] uppercase text-foreground/40">
             <div className="flex items-center gap-2">
               <Tractor className="h-3 w-3 text-accent" />
               <span>Booth Mode</span>
             </div>
-            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <span className="h-1 w-1 rounded-full bg-foreground/10" />
             <div className="flex items-center gap-3">
               <span className="flex gap-1.5"><kbd className="opacity-60">←</kbd> <kbd className="opacity-60">→</kbd></span>
               <span className="opacity-40">Navigate</span>
             </div>
-            <span className="h-1 w-1 rounded-full bg-white/20" />
+            <span className="h-1 w-1 rounded-full bg-foreground/10" />
             <div
               key={tickerIdx}
-              className="text-white/60 min-w-0 max-w-sm animate-in fade-in slide-in-from-right-4 duration-500 leading-snug"
+              className="text-foreground/60 min-w-0 max-w-sm animate-in fade-in slide-in-from-right-4 duration-500 leading-snug"
             >
               {TICKER_MESSAGES[tickerIdx]}
             </div>
