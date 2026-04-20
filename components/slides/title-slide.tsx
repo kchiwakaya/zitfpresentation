@@ -67,8 +67,8 @@ export function TitleSlide({ onStart, onStartAuto }: Props) {
             </div>
 
             <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-cinematic text-balance leading-[1.1] mb-8 text-white">
-              Securing Zimbabwe’s Food and Agriculture <br />
-              <span className="text-shimmer italic text-[0.7em] block mt-4 leading-tight">Through Agro-Ecological region specific Land Use Planning</span>
+              Fit for Purpose Land Use Planning <br />
+              <span className="text-shimmer italic text-[0.7em] block mt-4 leading-tight">Towards  sustainable agriculture and improved food security</span>
             </h1>
 
             <div className="h-px w-24 bg-accent/60 mx-auto my-8" />
