@@ -125,10 +125,15 @@ export function ModelShowcase({
                 setProgress(0)
               }}
               onDoubleClick={() => {
-                const title = code === "A1" ? "A1 Smallholder Model" : "A2 Commercial Model"
-                const src = code === "A1" 
-                  ? "https://images.unsplash.com/photo-1592419044706-39796d40f98c?q=80&w=1200&auto=format&fit=crop" // Representative A1
-                  : "https://images.unsplash.com/photo-1624720114708-0cbd6ee41f4e?q=80&w=1200&auto=format&fit=crop" // Representative A2
+                const title = `Region ${region.roman} · Farming Models Diagram`
+                const diagrams = {
+                  1: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_1_models_1776680511965.png",
+                  2: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_2_models_1776680532724.png",
+                  3: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_3_models_1776680574762.png",
+                  4: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_4_models_1776680602083.png",
+                  5: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_5_models_1776680634160.png"
+                }
+                const src = diagrams[region.id as keyof typeof diagrams]
                 setModalImage({ src, title })
               }}
               className={cn(
@@ -176,15 +181,15 @@ export function ModelShowcase({
           model={model} 
           colorVar={region.colorVar} 
           onShowEnhanced={() => {
-            const title = active === "A1" ? `${region.roman} · A1 Smallholder Model` : `${region.roman} · A2 Commercial Model`
-            const srcs = {
-              1: "https://images.unsplash.com/photo-1597484662317-9bd76add240a?q=80&w=1200&auto=format&fit=crop",
-              2: "https://images.unsplash.com/photo-1594750013233-0498305f23bc?q=80&w=1200&auto=format&fit=crop",
-              3: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1200&auto=format&fit=crop",
-              4: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop",
-              5: "https://images.unsplash.com/photo-1516422317184-3388bc6768b2?q=80&w=1200&auto=format&fit=crop"
+            const title = `Region ${region.roman} · Farming Models Diagram`
+            const diagrams = {
+              1: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_1_models_1776680511965.png",
+              2: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_2_models_1776680532724.png",
+              3: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_3_models_1776680574762.png",
+              4: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_4_models_1776680602083.png",
+              5: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_5_models_1776680634160.png"
             }
-            setModalImage({ src: srcs[region.id as keyof typeof srcs], title })
+            setModalImage({ src: diagrams[region.id as keyof typeof diagrams], title })
           }}
         />
 
@@ -254,18 +259,18 @@ export function ModelShowcase({
           onClick={() => setModalImage(null)}
         >
           <div 
-            className="relative max-w-5xl w-full glass rounded-3xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300"
+            className="relative w-[75vw] h-[75vh] max-w-screen-2xl glass rounded-[2.5rem] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="absolute top-4 right-4 z-10">
+            <div className="absolute top-6 right-6 z-10">
               <button 
                 onClick={() => setModalImage(null)}
-                className="h-10 w-10 rounded-full bg-black/20 hover:bg-black/40 backdrop-blur-md text-white flex items-center justify-center transition"
+                className="h-12 w-12 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md text-white flex items-center justify-center transition border border-white/10"
               >
-                <Pause className="h-5 w-5 rotate-45" />
+                <Pause className="h-6 w-6 rotate-45" />
               </button>
             </div>
-            <div className="aspect-[16/10] relative">
+            <div className="relative flex-1 w-full h-full">
               <img 
                 src={modalImage.src} 
                 alt={modalImage.title}
@@ -280,9 +285,7 @@ export function ModelShowcase({
                   {modalImage.title}
                 </h2>
                 <p className="text-white/80 max-w-2xl text-sm md:text-base leading-relaxed">
-                  {active === "A1" 
-                    ? `A closer look at the A1 smallholder farming model in Region ${region.roman}. This model focuses on intensive land use, diverse crop rotation (like ${model.enterprises[0]?.name}), and community-centric homesteads.`
-                    : `An aerial perspective of the A2 commercial model in Region ${region.roman}. Characterized by larger scales, professional infrastructure (like ${model.plotSize} plots), and mechanized systems optimized for this agro-ecological zone.`}
+                  A detailed comparison diagram showing the layout and enterprise mix of both the A1 smallholder and A2 commercial farming models in Region {region.roman}.
                 </p>
               </div>
             </div>

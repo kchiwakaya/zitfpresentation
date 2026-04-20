@@ -31,7 +31,7 @@ export function TitleSlide({ onStart, onStartAuto }: Props) {
       />
       <div className="absolute inset-0 bg-white/5 mix-blend-overlay z-0" aria-hidden />
       <div className="absolute inset-0 bg-topo opacity-[0.25] cinematic-mask z-0" aria-hidden />
-      
+
       {/* Floating particles (simplified CSS-only) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white/40 rounded-full animate-float" />
@@ -52,12 +52,12 @@ export function TitleSlide({ onStart, onStartAuto }: Props) {
       <div className="relative min-h-full flex flex-col items-center justify-center text-center px-6 py-20">
         <div className="max-w-6xl glass-luxe rounded-[4rem] p-12 md:p-20 shadow-2xl animate-cinematic-in border-white/10 relative">
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
-          
+
           <div className="relative z-10 flex flex-col items-center">
             <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full border border-white/20 bg-black/30 backdrop-blur-3xl text-[11px] tracking-[0.4em] font-bold text-white mb-12 uppercase shadow-xl group">
               <div className="h-12 w-12 flex items-center justify-center bg-white rounded-full p-2 shadow-[0_0_20px_rgba(255,255,255,0.4)] border border-white/40 transition-transform group-hover:scale-110">
-                <img 
-                  src="/images/logo.jpg" 
+                <img
+                  src="/images/logo.jpg"
                   alt="Ministry Logo"
                   className="max-h-full max-w-full object-contain rounded-full"
                   loading="eager"
@@ -66,9 +66,9 @@ export function TitleSlide({ onStart, onStartAuto }: Props) {
               <span className="drop-shadow-sm">Ministry of Lands and Rural Development</span>
             </div>
 
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-cinematic text-balance leading-[0.9] mb-8 text-white">
-              Zimbabwe&apos;s<br />
-              <span className="text-shimmer italic">Natural</span> Regions
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-cinematic text-balance leading-[1.1] mb-8 text-white">
+              Securing Zimbabwe’s Food and Agriculture <br />
+              <span className="text-shimmer italic text-[0.7em] block mt-4 leading-tight">Through Agro-Ecological region specific Land Use Planning</span>
             </h1>
 
             <div className="h-px w-24 bg-accent/60 mx-auto my-8" />
