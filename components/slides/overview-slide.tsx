@@ -59,11 +59,7 @@ export function OverviewSlide({ onJumpTo }: Props) {
         </div>
         <div className="flex items-start justify-between gap-8 mb-12">
           <div>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-cinematic leading-[1.1] text-balance">
-              Diversity in <br />
-              <span className="text-primary italic">Unity</span>
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed font-medium">
+            <p className="text-lg text-muted-foreground max-w-lg leading-relaxed font-medium">
               A precise mapping of Zimbabwe&apos;s natural potential. Select a region to explore local farming models and productivity.
             </p>
           </div>

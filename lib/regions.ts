@@ -44,7 +44,7 @@ export const regions: Region[] = [
     roman: "I",
     name: "The Eastern Highlands",
     tagline: "Zimbabwe's lush green crown",
-    heroTitle: "Eastern Highlands",
+    heroTitle: "Natural Region I",
     rainfall: ">1000 mm (rain possible all year)",
     rainfallMin: 1000,
     rainfallMax: 1400,
@@ -66,7 +66,7 @@ export const regions: Region[] = [
         code: "A1",
         label: "A1 Smallholder",
         subtitle: "Villagised resettlement · family farm",
-        plotSize: "5 – 6 ha",
+        plotSize: "15 – 25 ha",
         orientation: "Subsistence + surplus to local markets",
         enterprises: [
           { name: "Irish potatoes", detail: "0.5 ha · 15–20 t/ha" },
@@ -90,7 +90,7 @@ export const regions: Region[] = [
         code: "A2",
         label: "A2 Commercial",
         subtitle: "Medium-scale commercial resettlement",
-        plotSize: "20 – 100 ha",
+        plotSize: "100 – 250 ha",
         orientation: "Export-led commercial production",
         enterprises: [
           { name: "Commercial tea / coffee", detail: "10 – 30 ha estate" },
@@ -144,7 +144,7 @@ export const regions: Region[] = [
         code: "A1",
         label: "A1 Smallholder",
         subtitle: "Villagised resettlement · family farm",
-        plotSize: "5 – 6 ha",
+        plotSize: "25 – 50 ha",
         orientation: "Food security + cash crops",
         enterprises: [
           { name: "Maize", detail: "2 ha · 5 – 7 t/ha with fertiliser" },
@@ -168,7 +168,7 @@ export const regions: Region[] = [
         code: "A2",
         label: "A2 Commercial",
         subtitle: "Medium to large commercial farm",
-        plotSize: "100 – 250 ha",
+        plotSize: "200 – 400 ha",
         orientation: "Commercial grain, tobacco & livestock",
         enterprises: [
           { name: "Commercial maize", detail: "50 – 120 ha · 8 – 10 t/ha" },
@@ -217,7 +217,7 @@ export const regions: Region[] = [
         code: "A1",
         label: "A1 Smallholder",
         subtitle: "Mixed crop-livestock family farm",
-        plotSize: "6 – 8 ha arable · shared grazing",
+        plotSize: "60 – 80 ha",
         orientation: "Drought-smart food + cash crops",
         enterprises: [
           { name: "Maize (drought-tolerant hybrids)", detail: "1.5 ha Pfumvudza" },
@@ -241,7 +241,7 @@ export const regions: Region[] = [
         code: "A2",
         label: "A2 Commercial",
         subtitle: "Extensive ranch with cropping",
-        plotSize: "200 – 400 ha",
+        plotSize: "300 – 500 ha",
         orientation: "Beef + drought-tolerant cash crops",
         enterprises: [
           { name: "Commercial beef herd", detail: "100 – 250 head" },
@@ -294,10 +294,12 @@ export const regions: Region[] = [
       A1: {
         code: "A1",
         label: "A1 Smallholder",
-        subtitle: "Dryland smallholder · family farm",
-        plotSize: "10 – 12 ha arable",
+        subtitle: "Villagised & Three Tier settlements",
+        plotSize: "Villagised: 3.5ha + 40-70ha grazing",
         orientation: "Resilience & food security first",
         enterprises: [
+          { name: "A1 Villagised", detail: "Sedentary: 0.5ha homestead, 3ha arable, 40-70ha communal grazing" },
+          { name: "A1 Three Tier", detail: "In situ with legal grazing access only during drought years" },
           { name: "Sorghum & pearl millet", detail: "2 – 3 ha staple" },
           { name: "Finger millet (rapoko)", detail: "0.5 ha high-value" },
           { name: "Cowpeas & bambara", detail: "1 ha legumes" },
@@ -319,7 +321,7 @@ export const regions: Region[] = [
         code: "A2",
         label: "A2 Commercial",
         subtitle: "Extensive beef ranch",
-        plotSize: "500 – 1,500 ha",
+        plotSize: "700 – 1,500 ha",
         orientation: "Beef + strategic irrigation",
         enterprises: [
           { name: "Commercial beef herd", detail: "200 – 600 head" },
@@ -371,10 +373,12 @@ export const regions: Region[] = [
       A1: {
         code: "A1",
         label: "A1 Smallholder",
-        subtitle: "Lowveld smallholder / irrigation plot",
-        plotSize: "1 ha irrigated · or 15–20 ha dryland",
+        subtitle: "Villagised & Three Tier settlements",
+        plotSize: "Villagised: 3.5ha + 40-70ha grazing",
         orientation: "Irrigation plots + livestock + indigenous products",
         enterprises: [
+          { name: "A1 Villagised", detail: "Sedentary: 0.5ha homestead, 3ha arable, 40-70ha communal grazing" },
+          { name: "A1 Three Tier", detail: "In situ with legal grazing access only during drought years" },
           { name: "Sugar cane out-grower", detail: "1 ha in Chiredzi/Triangle schemes" },
           { name: "Drought grains (dryland)", detail: "sorghum, pearl millet" },
           { name: "Indigenous cattle", detail: "Tuli, Mashona breeds" },
@@ -396,7 +400,7 @@ export const regions: Region[] = [
         code: "A2",
         label: "A2 Commercial",
         subtitle: "Estate / conservancy / irrigation",
-        plotSize: "1,000 – 3,000+ ha",
+        plotSize: "1,500 – 2,000 ha",
         orientation: "Irrigation estates or game conservancies",
         enterprises: [
           { name: "Sugar cane estate", detail: "Hippo Valley, Triangle models" },

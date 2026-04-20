@@ -305,10 +305,16 @@ function ModelHeadline({
   onShowEnhanced: () => void
 }) {
   const imgSrc =
-    model.code === "A1" ? "/images/model-a1.jpg" : "/images/model-a2.jpg"
+    model.code === "A1"
+      ? model.subtitle.includes("Villagised")
+        ? "/images/model-a1-villagised.jpg"
+        : "/images/model-a1.jpg"
+      : "/images/model-a2.jpg"
   const imgAlt =
     model.code === "A1"
-      ? "Aerial view of an A1 smallholder farm plot"
+      ? model.subtitle.includes("Villagised")
+        ? "Aerial view of an A1 villagised settlement with communal grazing"
+        : "Aerial view of an A1 smallholder farm plot"
       : "Aerial view of an A2 commercial farm with center-pivot irrigation"
 
   return (
