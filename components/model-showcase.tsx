@@ -127,11 +127,11 @@ export function ModelShowcase({
               onDoubleClick={() => {
                 const title = `Region ${region.roman} · Farming Models Diagram`
                 const diagrams = {
-                  1: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_1_models_1776680511965.png",
-                  2: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_2_models_1776680532724.png",
-                  3: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_3_models_1776680574762.png",
-                  4: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_4_models_1776680602083.png",
-                  5: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_5_models_1776680634160.png"
+                  1: "/images/region-1-models.png",
+                  2: "/images/region-2-models.png",
+                  3: "/images/region-3-models.png",
+                  4: "/images/region-4-models.png",
+                  5: "/images/region-5-models.png"
                 }
                 const src = diagrams[region.id as keyof typeof diagrams]
                 setModalImage({ src, title })
@@ -183,11 +183,11 @@ export function ModelShowcase({
           onShowEnhanced={() => {
             const title = `Region ${region.roman} · Farming Models Diagram`
             const diagrams = {
-              1: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_1_models_1776680511965.png",
-              2: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_2_models_1776680532724.png",
-              3: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_3_models_1776680574762.png",
-              4: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_4_models_1776680602083.png",
-              5: "/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Cregion_5_models_1776680634160.png"
+              1: "/images/region-1-models.png",
+              2: "/images/region-2-models.png",
+              3: "/images/region-3-models.png",
+              4: "/images/region-4-models.png",
+              5: "/images/region-5-models.png"
             }
             setModalImage({ src: diagrams[region.id as keyof typeof diagrams], title })
           }}
@@ -259,35 +259,34 @@ export function ModelShowcase({
           onClick={() => setModalImage(null)}
         >
           <div 
-            className="relative w-[75vw] h-[75vh] max-w-screen-2xl glass rounded-[2.5rem] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col"
+            className="relative w-[75vw] h-[75vh] max-w-screen-2xl glass rounded-[2.5rem] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col bg-background/95 border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="absolute top-6 right-6 z-10">
-              <button 
+            {/* Header part */}
+            <div className="flex items-start justify-between p-6 md:p-8 shrink-0">
+               <div>
+                 <div className="text-xs tracking-[0.3em] uppercase font-bold text-accent mb-2">
+                   Enhanced Visualization · Region {region.roman}
+                 </div>
+                 <h2 className="font-serif text-3xl md:text-4xl font-semibold">
+                   {modalImage.title}
+                 </h2>
+               </div>
+               <button 
                 onClick={() => setModalImage(null)}
-                className="h-12 w-12 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md text-white flex items-center justify-center transition border border-white/10"
+                className="h-12 w-12 rounded-full bg-muted/60 hover:bg-muted text-foreground flex items-center justify-center transition border border-border"
               >
                 <Pause className="h-6 w-6 rotate-45" />
               </button>
             </div>
-            <div className="relative flex-1 w-full h-full">
+            
+            {/* Image part */}
+            <div className="relative flex-1 w-full bg-black/5 p-6 md:p-8 pt-0">
               <img 
                 src={modalImage.src} 
                 alt={modalImage.title}
-                className="absolute inset-0 h-full w-full object-cover"
+                className="w-full h-full object-contain rounded-2xl border border-white/5 drop-shadow-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                <div className="text-xs tracking-[0.3em] uppercase font-bold text-accent mb-2">
-                  Enhanced Visualization · Region {region.roman}
-                </div>
-                <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-4">
-                  {modalImage.title}
-                </h2>
-                <p className="text-white/80 max-w-2xl text-sm md:text-base leading-relaxed">
-                  A detailed comparison diagram showing the layout and enterprise mix of both the A1 smallholder and A2 commercial farming models in Region {region.roman}.
-                </p>
-              </div>
             </div>
           </div>
         </div>

@@ -94,7 +94,7 @@ export function OverviewSlide({ onJumpTo }: Props) {
           <div className="absolute inset-0 bg-primary/10 blur-[120px] rounded-full scale-110 -z-10 transition-opacity opacity-50 group-hover:opacity-100" />
           <div className="relative w-full max-w-2xl aspect-[1/1] glass rounded-[4rem] overflow-hidden border-white/20 shadow-2xl group-hover:scale-[1.01] transition-all duration-700 bg-white/5 p-8">
             <img
-              src="/api/local-image?path=C%3A%5CUsers%5CHP%5C.gemini%5Cantigravity%5Cbrain%5C58842060-dc0e-4ede-a2c0-7e1975e4e397%5Czimbabwe_regions_map_1776682309994.png"
+              src="/images/zimbabwe-regions-map.png"
               alt="Static Zimbabwe Agro-Ecological Regions Map"
               className="w-full h-full object-contain drop-shadow-2xl transition-all duration-700 group-hover:scale-105"
             />
